@@ -12,7 +12,7 @@ const FinalCTABand = () => {
 
   return (
     <section
-      className="relative py-10 sm:py-12 px-5 sm:px-8 lg:px-10 border-y border-primary/20"
+      className="relative hidden sm:block py-10 sm:py-12 px-5 sm:px-8 lg:px-10 border-y border-primary/20"
       style={{
         backgroundColor: "hsl(0 0% 6%)",
       }}
