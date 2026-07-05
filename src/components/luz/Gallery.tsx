@@ -1,66 +1,40 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Home as HomeIcon, Car as CarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+import driveway from "@/assets/gallery/driveway.jpg";
+import roof from "@/assets/gallery/roof.jpg";
+import houseWash from "@/assets/gallery/house-wash.jpg";
+import poolDeck from "@/assets/gallery/pool-deck.jpg";
+import dock from "@/assets/gallery/dock.jpg";
+import walkway from "@/assets/gallery/walkway.jpg";
+import exteriorSurface from "@/assets/gallery/exterior-surface.jpg";
+import landscaping from "@/assets/gallery/landscaping.jpg";
+import autoDetail from "@/assets/gallery/auto-detail.jpg";
+import autoInterior from "@/assets/gallery/auto-interior.jpg";
 
 type Category = "auto" | "home";
 
 type Project = {
   id: string;
   title: string;
-  description?: string;
+  description: string;
   category: Category;
   image: string;
 };
 
 const PROJECTS: Project[] = [
-  {
-    id: "p1",
-    title: "Luxury Sedan Full Detail",
-    description: "Paint decontamination, interior deep clean, and gloss restoration.",
-    category: "auto",
-    image:
-      "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "p2",
-    title: "Driveway Pressure Wash",
-    description: "Years of grime lifted for a like-new concrete finish.",
-    category: "home",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "p3",
-    title: "SUV Exterior Restoration",
-    description: "Hand wash, wax, and headlight restoration in one visit.",
-    category: "auto",
-    image:
-      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "p4",
-    title: "House Soft Wash",
-    description: "Safe, low-pressure exterior cleaning for siding and trim.",
-    category: "home",
-    image:
-      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "p5",
-    title: "Interior Deep Clean",
-    description: "Upholstery, carpets, and dash treated to a factory-fresh feel.",
-    category: "auto",
-    image:
-      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "p6",
-    title: "Patio & Pool Deck Refresh",
-    description: "Stain removal and surface brightening for outdoor living areas.",
-    category: "home",
-    image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
-  },
+  { id: "p1", title: "Driveway Cleaning", description: "Removed years of dirt and stains.", category: "home", image: driveway },
+  { id: "p2", title: "Roof Cleaning", description: "Restored the roof and boosted curb appeal.", category: "home", image: roof },
+  { id: "p3", title: "House Washing", description: "Soft washed to remove algae and buildup.", category: "home", image: houseWash },
+  { id: "p4", title: "Pool Deck Cleaning", description: "Clean, safe, and ready to enjoy.", category: "home", image: poolDeck },
+  { id: "p5", title: "Dock & Seawall Cleaning", description: "Removed buildup and restored appearance.", category: "home", image: dock },
+  { id: "p6", title: "Paver Walkway Cleaning", description: "Deep cleaned for a like-new finish.", category: "home", image: walkway },
+  { id: "p7", title: "Exterior Surface Cleaning", description: "We clean all exterior surfaces with care.", category: "home", image: exteriorSurface },
+  { id: "p8", title: "Lawn Care & Landscaping", description: "Keeping your property looking its best.", category: "home", image: landscaping },
+  { id: "p9", title: "Luxury Exterior Detail", description: "Paint decontamination and gloss restoration.", category: "auto", image: autoDetail },
+  { id: "p10", title: "Interior Deep Clean", description: "Upholstery and cabin restored to factory fresh.", category: "auto", image: autoInterior },
 ];
 
 const FILTERS: { key: "all" | Category; label: string }[] = [
@@ -90,59 +64,90 @@ export default function Gallery() {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14">
-          {FILTERS.map((f) => {
-            const isActive = active === f.key;
-            return (
-              <button
-                key={f.key}
-                onClick={() => setActive(f.key)}
-                className={[
-                  "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 border",
-                  isActive
-                    ? "bg-primary text-primary-foreground border-primary shadow-md"
-                    : "bg-transparent text-foreground border-border hover:border-primary hover:text-primary",
-                ].join(" ")}
-                aria-pressed={isActive}
-              >
-                {f.label}
-              </button>
-            );
-          })}
+        {/* Filters — segmented control */}
+        <div className="flex justify-center mb-10 md:mb-14">
+          <div className="inline-flex items-center gap-1 p-1 rounded-full border border-border bg-card/60 backdrop-blur">
+            {FILTERS.map((f) => {
+              const isActive = active === f.key;
+              return (
+                <button
+                  key={f.key}
+                  onClick={() => setActive(f.key)}
+                  className={[
+                    "px-5 md:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "text-muted-foreground hover:text-foreground",
+                  ].join(" ")}
+                  aria-pressed={isActive}
+                >
+                  {f.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {items.map((p) => (
-            <article
-              key={p.id}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:border-primary hover:shadow-2xl hover:shadow-primary/20 animate-fade-in"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-primary/90 text-primary-foreground backdrop-blur">
-                  {p.category === "auto" ? "Auto" : "Home"}
-                </span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {p.title}
-                </h3>
-                {p.description && (
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
+          {items.map((p) => {
+            const CategoryIcon = p.category === "home" ? HomeIcon : CarIcon;
+            const categoryLabel = p.category === "home" ? "Home" : "Auto";
+            return (
+              <article
+                key={p.id}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:border-primary hover:shadow-2xl hover:shadow-primary/25 animate-fade-in"
+              >
+                {/* Image with before/after treatment */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={`${p.title} — before and after`}
+                    loading="lazy"
+                    width={1280}
+                    height={960}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+
+                  {/* Gold center divider */}
+                  <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-primary/80 shadow-[0_0_12px_hsl(var(--primary)/0.6)]" />
+
+                  {/* Before / After labels */}
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[11px] font-semibold tracking-wide bg-background/80 text-foreground backdrop-blur">
+                    Before
+                  </span>
+                  <span className="absolute top-3 right-3 px-2.5 py-1 rounded-md text-[11px] font-semibold tracking-wide bg-background/80 text-foreground backdrop-blur">
+                    After
+                  </span>
+
+                  {/* Center gold pill */}
+                  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg ring-2 ring-background/50">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="9 6 3 12 9 18" />
+                      <polyline points="15 6 21 12 15 18" />
+                    </svg>
+                  </div>
+
+                  {/* Fade-in overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+
+                {/* Body */}
+                <div className="p-5">
+                  <div className="flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+                    <CategoryIcon size={14} />
+                    <span>{categoryLabel}</span>
+                  </div>
+                  <h3 className="text-base md:text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
                     {p.description}
                   </p>
-                )}
-              </div>
-            </article>
-          ))}
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* CTA */}
