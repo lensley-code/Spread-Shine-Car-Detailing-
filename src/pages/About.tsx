@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Award, Sparkles, HandshakeIcon, MapPin } from "lucide-react";
 import { setPageSeo } from "@/lib/seo";
-import johnnyPortrait from "@/assets/johnny-portrait.png.asset.json";
+import johnnyPortrait from "@/assets/johnny-portrait.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
