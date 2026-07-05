@@ -1,45 +1,53 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Instagram, Twitter, Send, ArrowRight, Sparkles, Heart, Clock } from "lucide-react";
-import { SOCIAL_PROFILES } from "@/config/latestSocialPosts";
+import { Send, Phone, Mail, Globe, MapPin, Clock, Check } from "lucide-react";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-// Inline TikTok icon (Lucide doesn't ship one) — matches Lucide style
-const TikTokIcon = ({ size = 18 }: { size?: number }) => (
-  <svg
-    viewBox="0 0 24 24"
-    width={size}
-    height={size}
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-  </svg>
-);
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { setPageSeo } from "@/lib/seo";
 
-const inquiryOptions = [
-  "Question before booking",
-  "Faith & astrology — I have concerns or questions",
-  "Technical issue with my appointment",
-  "Gift certificates",
-  "Something else",
+const serviceOptions = [
+  "Auto Detailing",
+  "Home Exterior Cleaning",
+  "Roof Cleaning",
+  "Driveway Cleaning",
+  "House Washing",
+  "Painting",
+  "Lawn Care",
+  "Oil Change",
+  "Brake Pad Replacement",
+  "Other",
 ];
 
+const trustBadges = [
+  "Fast Response",
+  "Free Estimates",
+  "Honest Pricing",
+  "Professional Service",
+];
+
+const PHONE = "(954) 204-6940";
+const PHONE_HREF = "tel:9542046940";
+const EMAIL = "jhonnyjb@sospreadshine.com";
+const WEBSITE = "www.sospreadshine.com";
+
+const quoteSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  phone: z.string().trim().min(7, "Valid phone required").max(30),
+  email: z.string().trim().email("Invalid email").max(255).optional().or(z.literal("")),
+  service: z.string().min(1, "Select a service"),
+  address: z.string().trim().max(200).optional(),
+  message: z.string().trim().max(2000).optional(),
+});
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.1 },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.08 },
   }),
 };
 
@@ -47,362 +55,208 @@ const Contact = () => {
   useEffect(() => {
     setPageSeo({
       path: "/contact",
-      title: "Contact · Luz Astrology | Faith & Alignment Through the Stars",
+      title: "Request a Free Quote · SoSpreadShine Auto & Home Cleaning",
       description:
-        "Reach out to Luz Astrology for readings, questions, and spiritual guidance rooted in faith and alignment.",
+        "Get a free, no-obligation quote from SoSpreadShine for auto detailing, pressure washing, roof cleaning, and exterior home cleaning in South Florida.",
     });
   }, []);
+
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", topic: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    service: "",
+    address: "",
+    message: "",
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
+
+    const parsed = quoteSchema.safeParse(form);
+    if (!parsed.success) {
+      toast.error(parsed.error.errors[0]?.message ?? "Please review the form.");
+      return;
+    }
+
     setSubmitting(true);
     try {
-      const { data, error } = await supabase.functions.invoke("submit-contact", { body: form });
+      const composedMessage = [
+        `Service Needed: ${form.service}`,
+        `Phone: ${form.phone}`,
+        form.address ? `Property Address: ${form.address}` : null,
+        "",
+        form.message || "(No additional message provided)",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      const payload = {
+        name: form.name.trim(),
+        email: (form.email.trim() || `noreply+${Date.now()}@sospreadshine.local`).toLowerCase(),
+        topic: form.service,
+        message: composedMessage,
+      };
+
+      const { error } = await supabase.functions.invoke("submit-contact", { body: payload });
       if (error) throw error;
-      console.log("[contact] submitted", data);
       setSubmitted(true);
     } catch (err) {
-      console.error("[contact] submit failed", err);
-      toast.error("Could not send your message. Please try again or email contact@luz-astrology.com directly.");
+      console.error("[quote] submit failed", err);
+      toast.error("Could not send your request. Please call (954) 204-6940 directly.");
     } finally {
       setSubmitting(false);
     }
   };
 
+  const inputBase =
+    "w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300 bg-background border border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/30";
+  const labelBase =
+    "block text-xs uppercase tracking-[0.15em] mb-2 font-semibold text-muted-foreground";
+
   return (
-    <div className="min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pt-36 lg:pb-20 text-center overflow-hidden" style={{ background: "var(--color-white)" }}>
-        {/* Soft radial glow */}
+      {/* Header */}
+      <section className="relative pt-28 pb-10 lg:pt-36 lg:pb-14 text-center overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200,168,78,0.08) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 30%, hsl(46 65% 52% / 0.12) 0%, transparent 70%)",
           }}
         />
-        {/* Animated shimmer band */}
-        <motion.div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-1/3 h-px pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(200,168,78,0.25) 50%, transparent 100%)",
-          }}
-          animate={{ opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {/* Faint star particles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(9)].map((_, i) => (
-            <motion.span
-              key={i}
-              className="absolute"
-              style={{
-                color: "var(--color-gold)",
-                opacity: 0.12,
-                fontSize: i % 3 === 0 ? "0.7rem" : "0.5rem",
-                left: `${8 + i * 10}%`,
-                top: `${15 + (i % 4) * 20}%`,
-              }}
-              animate={{ y: [0, -6, 0], opacity: [0.08, 0.22, 0.08] }}
-              transition={{ duration: 5 + (i % 4), repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-            >
-              ✦
-            </motion.span>
-          ))}
-        </div>
-
         <motion.div
           className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-3xl relative z-10"
           initial="hidden"
           animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
         >
           <motion.p
             variants={fadeUp}
             custom={0}
-            className="text-sm tracking-[0.25em] uppercase mb-4 font-semibold font-body"
-            style={{ color: "var(--color-gold)", fontSize: "0.7rem" }}
+            className="text-xs tracking-[0.25em] uppercase mb-4 font-semibold text-primary"
           >
-            Get in Touch
+            Get In Touch
           </motion.p>
           <motion.h1
             variants={fadeUp}
             custom={1}
-            className="font-heading font-light mb-5"
-            style={{
-              fontSize: "clamp(2.25rem, 5.5vw, 4rem)",
-              color: "var(--color-navy)",
-              fontFamily: "var(--font-serif)",
-              letterSpacing: "-0.01em",
-              lineHeight: 1.05,
-            }}
+            className="font-heading font-semibold mb-4 tracking-tight"
+            style={{ fontSize: "clamp(2.25rem, 5.5vw, 4rem)", lineHeight: 1.05 }}
           >
-            Let's Talk
+            Request Your <span className="text-primary">Free Quote</span>
           </motion.h1>
-          {/* Gold divider star */}
-          <motion.div
-            variants={fadeUp}
-            custom={2}
-            className="flex items-center justify-center gap-3 mb-6"
-            aria-hidden="true"
-          >
-            <span className="block h-px w-10" style={{ background: "linear-gradient(90deg, transparent, rgba(200,168,78,0.6))" }} />
-            <span style={{ color: "var(--color-gold)", fontSize: "0.85rem" }}>✦</span>
-            <span className="block h-px w-10" style={{ background: "linear-gradient(90deg, rgba(200,168,78,0.6), transparent)" }} />
-          </motion.div>
-          <motion.p
-            variants={fadeUp}
-            custom={3}
-            className="font-body max-w-md mx-auto"
-            style={{
-              fontSize: "1.05rem",
-              lineHeight: 1.75,
-              color: "var(--color-text)",
-              opacity: 0.85,
-              fontStyle: "italic",
-              fontFamily: "var(--font-serif)",
-              fontWeight: 300,
-            }}
-          >
-            Whether you have a question before booking, need help with your appointment, or want clarity on faith and astrology — I'm here to help.
-          </motion.p>
         </motion.div>
       </section>
 
-      {/* Main Contact Section */}
-      <section className="py-10 sm:py-16 lg:py-24" style={{ background: "var(--color-bg)" }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          <div className="grid lg:grid-cols-[1fr_340px] gap-8 lg:gap-14">
-            {/* Left — Form */}
+      {/* Main */}
+      <section className="pb-16 lg:pb-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-8 lg:gap-12 items-start">
+            {/* LEFT — Form */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="rounded-3xl p-6 sm:p-9 bg-card border border-border shadow-2xl shadow-black/30"
             >
-              <div
-                className="rounded-3xl p-6 sm:p-9 backdrop-blur-sm"
-                style={{
-                  background: "rgba(255,255,255,0.92)",
-                  border: "1px solid var(--color-border)",
-                  boxShadow: "0 12px 40px -12px rgba(15,23,42,0.12), 0 2px 8px rgba(200,168,78,0.04)",
-                }}
-              >
-                {!submitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-7">
-                    {/* Name */}
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-xs uppercase tracking-[0.15em] mb-2 font-semibold font-body"
-                        style={{ color: "var(--color-navy)", fontSize: "0.7rem" }}
-                      >
-                        Name
-                      </label>
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        maxLength={100}
-                        value={form.name}
-                        onChange={handleChange}
-                        className="w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300"
-                        style={{
-                          background: "var(--color-bg)",
-                          border: "1.5px solid var(--color-border)",
-                          color: "var(--color-text)",
-                        }}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-gold)")}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}
-                        placeholder="Your name"
-                      />
-                    </div>
+              <div className="mb-8 space-y-3">
+                <p className="text-lg text-primary font-medium">Ready to bring back the shine?</p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  Whether you need professional auto detailing or exterior home cleaning, we're here to help.
+                  Fill out the form below and we'll get back to you with a free, no-obligation quote.
+                </p>
+              </div>
 
-                    {/* Email */}
+              {!submitted ? (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-xs uppercase tracking-[0.15em] mb-2 font-semibold font-body"
-                        style={{ color: "var(--color-navy)", fontSize: "0.7rem" }}
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        maxLength={255}
-                        value={form.email}
-                        onChange={handleChange}
-                        className="w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300"
-                        style={{
-                          background: "var(--color-bg)",
-                          border: "1.5px solid var(--color-border)",
-                          color: "var(--color-text)",
-                        }}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-gold)")}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}
-                        placeholder="you@email.com"
-                      />
+                      <label htmlFor="name" className={labelBase}>Full Name *</label>
+                      <input id="name" name="name" type="text" required maxLength={100}
+                        value={form.name} onChange={handleChange} className={inputBase} placeholder="Your name" />
                     </div>
-
-                    {/* Topic */}
                     <div>
-                      <label
-                        htmlFor="topic"
-                        className="block text-xs uppercase tracking-[0.15em] mb-2 font-semibold font-body"
-                        style={{ color: "var(--color-navy)", fontSize: "0.7rem" }}
-                      >
-                        What's this about?
-                      </label>
-                      <select
-                        id="topic"
-                        name="topic"
-                        required
-                        value={form.topic}
+                      <label htmlFor="phone" className={labelBase}>Phone Number *</label>
+                      <input id="phone" name="phone" type="tel" required maxLength={30}
+                        value={form.phone} onChange={handleChange} className={inputBase} placeholder="(555) 555-5555" />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="email" className={labelBase}>Email Address</label>
+                      <input id="email" name="email" type="email" maxLength={255}
+                        value={form.email} onChange={handleChange} className={inputBase} placeholder="you@email.com" />
+                    </div>
+                    <div>
+                      <label htmlFor="service" className={labelBase}>Service Needed *</label>
+                      <select id="service" name="service" required value={form.service}
                         onChange={handleChange}
-                        className="w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300 appearance-none cursor-pointer"
-                        style={{
-                          background: "var(--color-bg)",
-                          border: "1.5px solid var(--color-border)",
-                          color: form.topic ? "var(--color-text)" : "var(--color-text-light)",
-                        }}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-gold)")}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}
-                      >
-                        <option value="" disabled>
-                          Select a topic
-                        </option>
-                        {inquiryOptions.map((opt) => (
-                          <option key={opt} value={opt}>
-                            {opt}
-                          </option>
+                        className={`${inputBase} appearance-none cursor-pointer ${form.service ? "" : "text-muted-foreground"}`}>
+                        <option value="" disabled>Select a service</option>
+                        {serviceOptions.map((opt) => (
+                          <option key={opt} value={opt} className="text-foreground bg-background">{opt}</option>
                         ))}
                       </select>
                     </div>
+                  </div>
 
-                    {/* Message */}
-                    <div>
-                      <label
-                        htmlFor="message"
-                        className="block text-xs uppercase tracking-[0.15em] mb-2 font-semibold font-body"
-                        style={{ color: "var(--color-navy)", fontSize: "0.7rem" }}
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        required
-                        maxLength={2000}
-                        rows={5}
-                        value={form.message}
-                        onChange={handleChange}
-                        className="w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300 resize-none"
-                        style={{
-                          background: "var(--color-bg)",
-                          border: "1.5px solid var(--color-border)",
-                          color: "var(--color-text)",
-                        }}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-gold)")}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = "var(--color-border)")}
-                        placeholder="What's on your mind?"
-                      />
-                    </div>
+                  <div>
+                    <label htmlFor="address" className={labelBase}>Property Address</label>
+                    <input id="address" name="address" type="text" maxLength={200}
+                      value={form.address} onChange={handleChange} className={inputBase}
+                      placeholder="Street, City, ZIP" />
+                  </div>
 
-                    {/* Submit */}
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-9 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 font-body hover:-translate-y-0.5 hover:shadow-[0_10px_28px_-8px_rgba(200,168,78,0.55)] cursor-pointer"
-                      style={{
-                        background: "var(--color-gold)",
-                        color: "var(--color-white)",
-                        boxShadow: "0 2px 12px rgba(200,168,78,0.2)",
-                        opacity: submitting ? 0.7 : 1,
-                      }}
-                    >
-                      <Send size={15} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                      {submitting ? "Sending…" : "Send Message"}
-                    </button>
-                    <p
-                      className="text-xs font-body mt-2"
-                      style={{ color: "var(--color-text-light)", fontStyle: "italic" }}
-                    >
-                      I personally read every message. You'll hear back from me directly.
-                    </p>
-                  </form>
-                ) : (
-                  /* Success State */
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center py-8"
+                  <div>
+                    <label htmlFor="message" className={labelBase}>Message</label>
+                    <textarea id="message" name="message" rows={4} maxLength={2000}
+                      value={form.message} onChange={handleChange}
+                      className={`${inputBase} resize-none`}
+                      placeholder="Tell us a bit about your project..." />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="group w-full inline-flex items-center justify-center gap-2 rounded-full px-9 py-4 text-sm font-semibold uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70"
                   >
-                    <div
-                      className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-5"
-                      style={{ background: "rgba(200,168,78,0.12)" }}
-                    >
-                      <span style={{ color: "var(--color-gold)", fontSize: "1.5rem" }}>✦</span>
-                    </div>
-                    <h2
-                      className="font-heading font-light mb-3"
-                      style={{ fontSize: "1.75rem", color: "var(--color-navy)" }}
-                    >
-                      Message received
-                    </h2>
-                    <p
-                      className="font-body text-sm mb-8 max-w-sm mx-auto"
-                      style={{ lineHeight: 1.7, color: "var(--color-text-light)" }}
-                    >
-                      Thank you for reaching out. I've received your message and will be in touch soon.
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                      <Link
-                        to="/faq"
-                        className="inline-flex items-center justify-center rounded-xl px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 font-body hover:-translate-y-0.5"
-                        style={{
-                          background: "transparent",
-                          color: "var(--color-gold)",
-                          border: "1.5px solid var(--color-gold)",
-                        }}
-                      >
-                        View FAQ
-                      </Link>
-                       <Link
-                         to="/book"
-                         className="inline-flex items-center justify-center rounded-xl px-7 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 font-body hover:-translate-y-0.5"
-                         style={{
-                           background: "var(--color-gold)",
-                           color: "var(--color-white)",
-                           boxShadow: "0 2px 8px rgba(200,168,78,0.15)",
-                         }}
-                       >
-                         Book a Session
-                       </Link>
-                    </div>
-                  </motion.div>
-                )}
-              </div>
+                    <Send size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                    {submitting ? "Sending…" : "Get My Free Quote"}
+                  </button>
+                </form>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-10"
+                >
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 mb-5">
+                    <Check className="text-primary" size={26} />
+                  </div>
+                  <h2 className="font-heading text-2xl font-semibold mb-3">Quote request received</h2>
+                  <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                    Thanks for reaching out. We'll be in touch shortly with your free, no-obligation quote.
+                  </p>
+                </motion.div>
+              )}
             </motion.div>
 
-            {/* Right — Social */}
+            {/* RIGHT — Contact info */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -410,229 +264,109 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="flex flex-col gap-5"
             >
-              {/* Instagram Card */}
-              {/* Follow Luz Astrology Card */}
-              <div
-                className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_36px_-14px_rgba(15,23,42,0.18)] group"
-                style={{
-                  background: "var(--color-white)",
-                  border: "1px solid var(--color-border)",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
-                }}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center"
-                    style={{ background: "rgba(200,168,78,0.1)" }}
+              <div className="rounded-3xl p-6 sm:p-8 bg-card border border-border shadow-xl shadow-black/20">
+                {/* Call */}
+                <div className="pb-6 border-b border-border">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <Phone size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-semibold">Call Us</p>
+                      <p className="font-heading text-lg font-semibold">{PHONE}</p>
+                    </div>
+                  </div>
+                  <a
+                    href={PHONE_HREF}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                   >
-                    <Sparkles size={18} style={{ color: "var(--color-gold)" }} />
-                  </div>
-                  <div>
-                    <p className="font-heading text-base font-medium" style={{ color: "var(--color-navy)" }}>
-                      Follow Luz Astrology
-                    </p>
-                    <p className="text-xs font-body" style={{ color: "var(--color-text-light)" }}>
-                      @prophluz
-                    </p>
-                  </div>
-                </div>
-                <p className="text-sm font-body mb-5" style={{ lineHeight: 1.7, color: "var(--color-text-light)" }}>
-                  Astrological insight, biblical reflection, and spiritual wisdom — shared regularly across social platforms.
-                </p>
-
-                <div className="flex items-center gap-3 mb-5">
-                  {[
-                    { href: SOCIAL_PROFILES.instagram, label: "Instagram", icon: <Instagram size={16} /> },
-                    { href: SOCIAL_PROFILES.tiktok, label: "TikTok", icon: <TikTokIcon size={16} /> },
-                    { href: SOCIAL_PROFILES.x, label: "X (Twitter)", icon: <Twitter size={16} /> },
-                  ].map(({ href, label, icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 hover:-translate-y-0.5"
-                      style={{
-                        background: "rgba(200,168,78,0.08)",
-                        border: "1px solid var(--color-border)",
-                        color: "var(--color-navy)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "rgba(200,168,78,0.18)";
-                        e.currentTarget.style.borderColor = "rgba(200,168,78,0.5)";
-                        e.currentTarget.style.color = "var(--color-gold)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "rgba(200,168,78,0.08)";
-                        e.currentTarget.style.borderColor = "var(--color-border)";
-                        e.currentTarget.style.color = "var(--color-navy)";
-                      }}
-                    >
-                      {icon}
-                    </a>
-                  ))}
+                    <Phone size={15} /> Call Now
+                  </a>
                 </div>
 
-                <a
-                  href={SOCIAL_PROFILES.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] font-body transition-colors duration-300"
-                  style={{ color: "var(--color-gold)" }}
-                >
-                  Follow Luz Astrology <ArrowRight size={13} />
-                </a>
+                {/* Email */}
+                <InfoRow icon={<Mail size={18} className="text-primary" />} label="Email">
+                  <a href={`mailto:${EMAIL}`} className="hover:text-primary transition-colors break-all">
+                    {EMAIL}
+                  </a>
+                </InfoRow>
+
+                {/* Website */}
+                <InfoRow icon={<Globe size={18} className="text-primary" />} label="Website">
+                  <a href={`https://${WEBSITE}`} className="hover:text-primary transition-colors">{WEBSITE}</a>
+                </InfoRow>
+
+                {/* Service Area */}
+                <InfoRow icon={<MapPin size={18} className="text-primary" />} label="Service Area">
+                  Proudly Serving South Florida
+                </InfoRow>
+
+                {/* Hours */}
+                <InfoRow icon={<Clock size={18} className="text-primary" />} label="Business Hours" last>
+                  <div className="space-y-1">
+                    <div className="flex justify-between gap-4">
+                      <span>Monday–Saturday</span>
+                      <span className="text-muted-foreground">8:00 AM – 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between gap-4">
+                      <span>Sunday</span>
+                      <span className="text-muted-foreground">By Appointment</span>
+                    </div>
+                  </div>
+                </InfoRow>
               </div>
 
-              {/* What to Expect Card */}
-              <div
-                className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_36px_-14px_rgba(15,23,42,0.18)]"
-                style={{
-                  background: "var(--color-white)",
-                  border: "1px solid var(--color-border)",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
-                }}
-              >
-                <p
-                  className="text-xs uppercase tracking-[0.2em] font-semibold font-body mb-4"
-                  style={{ color: "var(--color-gold)", fontSize: "0.68rem" }}
-                >
-                  What to Expect
-                </p>
-                <ul className="space-y-3.5">
-                  {[
-                    { icon: Sparkles, text: "A thoughtful, personal response" },
-                    { icon: Heart, text: "Spiritually grounded guidance" },
-                    { icon: Clock, text: "Replies within 2–3 business days" },
-                  ].map(({ icon: Icon, text }) => (
-                    <li key={text} className="flex items-start gap-3">
-                      <span
-                        className="shrink-0 mt-0.5 inline-flex items-center justify-center w-7 h-7 rounded-full"
-                        style={{ background: "rgba(200,168,78,0.12)" }}
-                      >
-                        <Icon size={13} style={{ color: "var(--color-gold)" }} />
-                      </span>
-                      <span
-                        className="font-body text-sm"
-                        style={{ color: "var(--color-text)", lineHeight: 1.6 }}
-                      >
-                        {text}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Orbit decoration */}
-              <div className="hidden lg:flex items-center justify-center py-4">
-                <motion.div
-                  className="relative w-28 h-28"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                >
+              {/* Trust badges */}
+              <div className="grid grid-cols-2 gap-3">
+                {trustBadges.map((badge) => (
                   <div
-                    className="absolute inset-0 rounded-full"
-                    style={{ border: "1px dashed var(--color-border)" }}
-                  />
-                  <div
-                    className="absolute inset-3 rounded-full"
-                    style={{ border: "1px dashed rgba(200,168,78,0.25)" }}
-                  />
-                  <motion.span
-                    className="absolute text-xs"
-                    style={{ color: "var(--color-gold)", top: "-4px", left: "50%", transform: "translateX(-50%)" }}
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    key={badge}
+                    className="flex items-center gap-2 rounded-xl bg-card border border-border px-4 py-3 hover:border-primary/50 transition-colors"
                   >
-                    ✦
-                  </motion.span>
-                  <motion.span
-                    className="absolute text-xs"
-                    style={{ color: "var(--color-gold)", bottom: "-4px", left: "50%", transform: "translateX(-50%)" }}
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  >
-                    ✦
-                  </motion.span>
-                  <motion.span
-                    className="absolute text-[0.6rem]"
-                    style={{ color: "var(--color-gold)", top: "50%", left: "-4px", transform: "translateY(-50%)" }}
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  >
-                    ✦
-                  </motion.span>
-                </motion.div>
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/15">
+                      <Check size={13} className="text-primary" strokeWidth={3} />
+                    </span>
+                    <span className="text-sm font-medium">{badge}</span>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="pb-20 lg:pb-28 pt-4" style={{ background: "var(--color-bg)" }}>
-        <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-3xl">
+      {/* Final CTA */}
+      <section className="pb-20 lg:pb-28">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-3xl overflow-hidden text-center px-6 sm:px-12 py-14 sm:py-20"
+            className="relative rounded-3xl overflow-hidden text-center px-6 sm:px-12 py-14 sm:py-20 bg-card border border-primary/20"
             style={{
-              background:
-                "radial-gradient(ellipse 80% 70% at 50% 0%, rgba(200,168,78,0.08) 0%, transparent 60%), var(--color-white)",
-              border: "1px solid var(--color-border)",
-              boxShadow: "0 20px 60px -30px rgba(15,23,42,0.18)",
+              backgroundImage:
+                "radial-gradient(ellipse 80% 70% at 50% 0%, hsl(46 65% 52% / 0.15) 0%, transparent 60%)",
             }}
           >
-            {/* Celestial divider above heading */}
-            <div className="flex items-center justify-center gap-3 mb-6" aria-hidden="true">
-              <span className="block h-px w-12" style={{ background: "linear-gradient(90deg, transparent, rgba(200,168,78,0.5))" }} />
-              <span style={{ color: "var(--color-gold)", fontSize: "0.85rem" }}>✦</span>
-              <span className="block h-px w-12" style={{ background: "linear-gradient(90deg, rgba(200,168,78,0.5), transparent)" }} />
-            </div>
-            <h2
-              className="font-heading font-light mb-4"
-              style={{
-                fontSize: "clamp(1.65rem, 3.2vw, 2.4rem)",
-                color: "var(--color-navy)",
-                fontFamily: "var(--font-serif)",
-              }}
-            >
-              Not ready to reach out yet?
+            <h2 className="font-heading font-semibold mb-3 tracking-tight"
+              style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", lineHeight: 1.15 }}>
+              Your Vehicle and Home Deserve the Best.
             </h2>
-            <p
-              className="font-body mb-10 max-w-md mx-auto"
-              style={{ fontSize: "0.95rem", lineHeight: 1.7, color: "var(--color-text-light)" }}
-            >
-              You might find what you're looking for in the FAQ — especially if you have questions about faith and astrology.
+            <p className="text-lg sm:text-xl text-primary font-medium mb-10">
+              Let's Bring Back the Shine.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/faq"
-                className="inline-flex items-center justify-center rounded-full px-9 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 font-body hover:-translate-y-0.5 hover:shadow-[0_10px_28px_-8px_rgba(200,168,78,0.55)]"
-                style={{
-                  background: "var(--color-gold)",
-                  color: "var(--color-white)",
-                  border: "1.5px solid var(--color-gold)",
-                  boxShadow: "0 2px 8px rgba(200,168,78,0.15)",
-                }}
-              >
-                Read the FAQ
-              </Link>
-               <Link
-                 to="/book"
-                 className="inline-flex items-center justify-center rounded-full px-9 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 font-body hover:-translate-y-0.5 hover:bg-[rgba(200,168,78,0.06)]"
-                 style={{
-                   background: "transparent",
-                   color: "var(--color-gold)",
-                   border: "1.5px solid var(--color-gold)",
-                 }}
-               >
-                 Book a Session
-               </Link>
-            </div>
+            <a
+              href="#top"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("name")?.focus();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="inline-flex items-center justify-center rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Get Started Today
+            </a>
           </motion.div>
         </div>
       </section>
@@ -641,5 +375,29 @@ const Contact = () => {
     </div>
   );
 };
+
+const InfoRow = ({
+  icon,
+  label,
+  children,
+  last,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  children: React.ReactNode;
+  last?: boolean;
+}) => (
+  <div className={`py-5 ${last ? "" : "border-b border-border"}`}>
+    <div className="flex items-start gap-3">
+      <div className="w-11 h-11 shrink-0 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+        {icon}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-semibold mb-1">{label}</p>
+        <div className="text-sm sm:text-base font-medium">{children}</div>
+      </div>
+    </div>
+  </div>
+);
 
 export default Contact;
