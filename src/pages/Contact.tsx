@@ -273,11 +273,18 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-semibold">Call Us</p>
-                      <p className="font-heading text-lg font-semibold">{PHONE}</p>
+                      <a
+                        href={PHONE_HREF}
+                        aria-label="Call SoSpreadShine at 954-204-6940"
+                        className="font-heading text-lg font-semibold hover:text-primary transition-colors"
+                      >
+                        {PHONE}
+                      </a>
                     </div>
                   </div>
                   <a
                     href={PHONE_HREF}
+                    aria-label="Call SoSpreadShine at 954-204-6940"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                   >
                     <Phone size={15} /> Call Now
