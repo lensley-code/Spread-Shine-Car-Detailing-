@@ -1,7 +1,10 @@
 import { Check, Car, Home as HomeIcon, Sparkles, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import autoImg from "@/assets/gallery/auto-detail.jpg";
-import homeImg from "@/assets/gallery/house-wash.jpg";
+import autoImgAsset from "@/assets/services/auto-detailing.jpg.asset.json";
+import homeImgAsset from "@/assets/services/exterior-home.jpg.asset.json";
+
+const autoImg = autoImgAsset.url;
+const homeImg = homeImgAsset.url;
 
 const autoItems = [
   "Exterior Hand Wash",
