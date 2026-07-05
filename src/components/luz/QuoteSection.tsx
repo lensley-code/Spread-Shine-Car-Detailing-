@@ -19,12 +19,8 @@ const serviceOptions = [
   "Other",
 ];
 
-const trustBadges = ["Fast Response", "Free Estimates", "Honest Pricing", "Professional Service"];
-
 const PHONE = "(954) 204-6940";
 const PHONE_HREF = "tel:9542046940";
-const EMAIL = "jhonnyjb@sospreadshine.com";
-const WEBSITE = "www.sospreadshine.com";
 
 const quoteSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -35,20 +31,6 @@ const quoteSchema = z.object({
   message: z.string().trim().max(2000).optional(),
 });
 
-const InfoRow = ({
-  icon, label, children, last,
-}: { icon: React.ReactNode; label: string; children: React.ReactNode; last?: boolean }) => (
-  <div className={`py-5 ${last ? "" : "border-b border-border"}`}>
-    <div className="flex items-start gap-3">
-      <div className="w-11 h-11 shrink-0 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-        {icon}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-semibold mb-1">{label}</p>
-        <div className="text-sm sm:text-base font-medium">{children}</div>
-      </div>
-    </div>
-  </div>
 );
 
 const QuoteSection = () => {
