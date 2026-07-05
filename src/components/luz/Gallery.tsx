@@ -68,7 +68,7 @@ export default function Gallery() {
 
         {/* Filters — segmented control */}
         <div className="flex justify-center mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-1 p-1 rounded-full border border-border bg-card/60 backdrop-blur">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1 p-1 rounded-full border border-border bg-card/60 backdrop-blur max-w-full">
             {FILTERS.map((f) => {
               const isActive = active === f.key;
               return (
@@ -76,7 +76,7 @@ export default function Gallery() {
                   key={f.key}
                   onClick={() => setActive(f.key)}
                   className={[
-                    "px-5 md:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300",
+                    "px-4 sm:px-5 md:px-6 py-2.5 min-h-[44px] rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap",
                     isActive
                       ? "bg-primary text-primary-foreground shadow-md"
                       : "text-muted-foreground hover:text-foreground",
@@ -89,6 +89,7 @@ export default function Gallery() {
             })}
           </div>
         </div>
+
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
