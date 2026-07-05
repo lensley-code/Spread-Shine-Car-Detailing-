@@ -1,99 +1,101 @@
 import { ShieldCheck, Sparkles, BadgeDollarSign, Heart } from "lucide-react";
-import whyChooseImage from "@/assets/why-choose.jpg";
 
-const features = [
+const values = [
   {
     icon: ShieldCheck,
     title: "Reliable Service",
-    description: "We arrive on time, communicate clearly, and treat your property with respect.",
+    description: "We show up on time, communicate clearly, and respect your property.",
   },
   {
     icon: Sparkles,
     title: "Attention to Detail",
-    description: "Every surface receives the care it deserves, from start to finish.",
+    description: "Every vehicle and property receives careful, hands-on attention.",
   },
   {
     icon: BadgeDollarSign,
     title: "Honest Pricing",
-    description: "Clear, upfront pricing with no hidden surprises.",
+    description: "Clear quotes with fair pricing and no unnecessary surprises.",
   },
   {
     icon: Heart,
     title: "Customer Satisfaction",
-    description: "Our success is measured by the quality of our work and the trust of our customers.",
+    description: "We take pride in work that earns trust and repeat customers.",
   },
 ];
 
 const scrollToQuote = () => {
-  const el = document.getElementById("contact") || document.getElementById("quote");
-  if (el) el.scrollIntoView({ behavior: "smooth" });
+  const el = document.getElementById("quote") || document.getElementById("contact");
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
 };
 
 const AboutSection = () => (
-  <section
-    id="learn-more"
-    className="surface-cream relative py-20 lg:py-32 overflow-hidden"
-  >
+  <section id="learn-more" className="surface-white relative">
+    {/* Top transition: warm cream fading into white */}
+    <div
+      aria-hidden="true"
+      className="h-16 md:h-24 w-full"
+      style={{
+        background: "linear-gradient(to bottom, hsl(39 43% 97%), hsl(0 0% 100%))",
+      }}
+    />
 
-    <div className="container mx-auto px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        {/* LEFT: Image */}
-        <div className="relative group">
-          <div className="absolute -inset-4 bg-primary/10 rounded-2xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-          <div className="relative overflow-hidden rounded-2xl border border-primary/20 shadow-2xl">
-            <img
-              src={whyChooseImage}
-              alt="Professional detailer polishing a luxury vehicle in South Florida"
-              width={1280}
-              height={1280}
-              loading="lazy"
-              className="w-full h-full object-cover aspect-[4/5] transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/50 via-transparent to-transparent pointer-events-none" />
-          </div>
+    <div className="py-20 lg:py-32">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center space-y-5">
+          <p className="text-primary text-xs sm:text-sm tracking-[0.3em] uppercase font-medium">
+            Why Choose Us
+          </p>
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-light text-foreground leading-tight">
+            Quality Work. Honest Service. Every Time.
+          </h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            SoSpreadShine is built on simple values: reliable communication, careful
+            workmanship, fair pricing, and results you can see.
+          </p>
         </div>
 
-        {/* RIGHT: Content */}
-        <div className="space-y-8">
-          <div className="space-y-5">
-            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-              Why Choose <span className="text-primary">SoSpreadShine?</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              At SoSpreadShine, every project is treated with care, professionalism, and attention to detail. Whether we're restoring the shine to your vehicle or refreshing your home's exterior, our goal is simple: deliver quality work you can be proud of.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {features.map(({ icon: Icon, title, description }) => (
-              <div
-                key={title}
-                className="group relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10"
-              >
-                <div className="flex items-center justify-center w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Icon className="w-5 h-5 text-primary" strokeWidth={1.75} />
-                </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
+        <div className="mt-16 lg:mt-20 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 md:gap-y-14">
+          {values.map(({ icon: Icon, title, description }) => (
+            <div key={title} className="flex gap-4 items-start">
+              <Icon
+                className="w-5 h-5 mt-1 text-primary shrink-0"
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
+              <div>
+                <h3 className="font-heading text-lg font-medium text-foreground mb-1.5">
                   {title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed">
                   {description}
                 </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          <div className="flex justify-center pt-4">
-            <button
-              onClick={scrollToQuote}
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-medium tracking-wide shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.03] transition-all duration-300"
-            >
-              Request a Free Quote
-            </button>
-          </div>
+        <div className="mt-16 lg:mt-20 flex justify-center">
+          <button
+            onClick={scrollToQuote}
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-primary/60 text-foreground text-sm font-medium tracking-wide hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+          >
+            Request a Free Quote
+          </button>
         </div>
       </div>
     </div>
+
+    {/* Bottom transition: white fading into warm cream */}
+    <div
+      aria-hidden="true"
+      className="h-16 md:h-24 w-full"
+      style={{
+        background: "linear-gradient(to bottom, hsl(0 0% 100%), hsl(39 43% 97%))",
+      }}
+    />
   </section>
 );
 
