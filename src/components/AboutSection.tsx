@@ -32,7 +32,7 @@ const scrollToQuote = () => {
 };
 
 const AboutSection = () => (
-  <section id="learn-more" className="surface-white relative">
+  <section id="learn-more" className="surface-white relative" style={{ backgroundColor: "#F8F9FA" }}>
     <div className="py-14 sm:py-20 lg:py-28">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-5">
