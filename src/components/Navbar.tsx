@@ -31,7 +31,7 @@ const PHONE_HREF = "tel:9542046940";
 const navItems = [
   { label: "Home", href: "/", isPage: true },
   { label: "Services", href: "/#services" },
-  { label: "Our Work", href: "/#gallery" },
+  { label: "Gallery", href: "/#gallery" },
   { label: "About", href: "/about", isPage: true },
   { label: "Contact", href: "/contact", isPage: true },
 ];
