@@ -213,13 +213,21 @@ const Navbar = () => {
               </a>
             )
           )}
+          <a
+            href={PHONE_HREF}
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 flex items-center justify-center gap-2 rounded-full h-12 px-6 border-2 border-primary text-primary text-sm font-semibold tracking-wide"
+          >
+            <Phone size={16} /> Call (954) 204-6940
+          </a>
           <Button
             variant="gold"
-            className="rounded-full px-7 h-11 text-sm font-semibold tracking-wide mt-3 w-full"
-            onClick={handleBookClick}
+            className="rounded-full px-7 h-12 text-sm font-semibold tracking-wide mt-3 w-full"
+            onClick={handleQuoteClick}
           >
-            Book
+            Get My Free Quote
           </Button>
+
 
           {/* Mobile social icons */}
           <div className="flex items-center justify-center gap-6 pt-5 mt-4 border-t border-[hsl(40_30%_30%/0.2)]">
