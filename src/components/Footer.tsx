@@ -102,6 +102,7 @@ const Footer = () => {
               <li>
                 <a
                   href="tel:9542046940"
+                  aria-label="Call SoSpreadShine at 954-204-6940"
                   className="inline-flex items-center gap-2 hover:text-primary transition-colors"
                 >
                   <Phone size={14} className="text-primary" /> (954) 204-6940
