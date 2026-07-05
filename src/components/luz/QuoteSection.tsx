@@ -116,7 +116,7 @@ const QuoteSection = () => {
             Request Your <span className="text-primary">Free Quote</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Ready to bring back the shine? Fill out the form and we'll get back to you with a free, no-obligation quote.
+            Tell us a little about your project and we'll get back to you with a free, no-obligation quote.
           </p>
         </motion.div>
 
