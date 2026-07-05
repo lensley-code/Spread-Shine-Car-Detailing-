@@ -126,66 +126,83 @@ const QuoteSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-3xl p-6 sm:p-9 bg-card border border-border shadow-2xl shadow-black/30"
+            className="rounded-3xl p-6 sm:p-9 bg-white border border-[#E7E7E7] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)]"
           >
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-5">
+              <>
+                {/* Phone callout */}
+                <a
+                  href={PHONE_HREF}
+                  className="flex items-center gap-4 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3.5 mb-6 hover:bg-primary/10 transition-colors"
+                >
+                  <span className="inline-flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-primary/15">
+                    <Phone size={18} className="text-primary" />
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span className="block text-xs text-[#6B7280]">Need a faster response?</span>
+                    <span className="block text-base font-semibold text-[#1F2937]">Call (954) 204-6940</span>
+                  </span>
+                  <ArrowRight size={18} className="text-primary shrink-0" />
+                </a>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="q-name" className={labelBase}>Full Name *</label>
+                    <label htmlFor="q-name" className={labelBase}>Name</label>
                     <input id="q-name" name="name" type="text" required maxLength={100}
                       autoComplete="name"
                       value={form.name} onChange={handleChange} className={inputBase} placeholder="Your name" />
                   </div>
                   <div>
-                    <label htmlFor="q-phone" className={labelBase}>Phone Number *</label>
+                    <label htmlFor="q-phone" className={labelBase}>Phone number</label>
                     <input id="q-phone" name="phone" type="tel" required maxLength={30}
                       inputMode="tel" autoComplete="tel"
                       value={form.phone} onChange={handleChange} className={inputBase} placeholder="(555) 555-5555" />
                   </div>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-5">
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="q-email" className={labelBase}>Email Address</label>
+                    <label htmlFor="q-email" className={labelBase}>Email address <span className="text-[#9CA3AF] font-normal">(optional)</span></label>
                     <input id="q-email" name="email" type="email" maxLength={255}
                       inputMode="email" autoComplete="email" autoCapitalize="off" spellCheck={false}
                       value={form.email} onChange={handleChange} className={inputBase} placeholder="you@email.com" />
                   </div>
                   <div>
-                    <label htmlFor="q-service" className={labelBase}>Service Needed *</label>
+                    <label htmlFor="q-service" className={labelBase}>What service do you need?</label>
                     <select id="q-service" name="service" required value={form.service}
                       onChange={handleChange}
-                      className={`${inputBase} appearance-none cursor-pointer ${form.service ? "" : "text-muted-foreground"}`}>
+                      className={`${inputBase} appearance-none cursor-pointer ${form.service ? "" : "text-[#9CA3AF]"}`}>
                       <option value="" disabled>Select a service</option>
                       {serviceOptions.map((opt) => (
-                        <option key={opt} value={opt} className="text-foreground bg-background">{opt}</option>
+                        <option key={opt} value={opt} className="text-[#1F2937] bg-white">{opt}</option>
                       ))}
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="q-address" className={labelBase}>Property Address</label>
+                  <label htmlFor="q-address" className={labelBase}>Property address <span className="text-[#9CA3AF] font-normal">(optional)</span></label>
                   <input id="q-address" name="address" type="text" maxLength={200}
                     autoComplete="street-address"
                     value={form.address} onChange={handleChange} className={inputBase} placeholder="Street, City, ZIP" />
                 </div>
                 <div>
-                  <label htmlFor="q-message" className={labelBase}>Message</label>
+                  <label htmlFor="q-message" className={labelBase}>Tell us about your project</label>
                   <textarea id="q-message" name="message" rows={4} maxLength={2000}
                     value={form.message} onChange={handleChange}
                     className={`${inputBase} resize-none min-h-[120px]`}
-                    placeholder="Tell us a bit about your project..." />
+                    placeholder="A few details help us prepare an accurate quote..." />
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group w-full inline-flex items-center justify-center gap-2 rounded-full px-9 py-4 text-sm font-semibold uppercase tracking-[0.1em] bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70"
+                  className="group w-full inline-flex items-center justify-center gap-2 rounded-full h-14 px-8 text-base font-semibold bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70"
                 >
-                  <Send size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
                   {submitting ? "Sending…" : "Get My Free Quote"}
+                  <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </form>
+              </>
             ) : (
               <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-10">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 mb-5">
