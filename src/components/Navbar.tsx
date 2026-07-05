@@ -85,7 +85,7 @@ const Navbar = () => {
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-[hsl(40_30%_30%/0.2)]"
-      style={{ backgroundColor: "hsl(222 47% 8% / 0.9)" }}
+      style={{ backgroundColor: "hsl(0 0% 7% / 0.9)" }}
     >
       <div className="container mx-auto flex items-center justify-between h-[72px] lg:h-20 px-5 lg:px-10">
         <Link
@@ -101,9 +101,13 @@ const Navbar = () => {
             }
           }}
         >
-          <span className="text-primary text-2xl">✦</span>
-          <span className="font-heading text-[22px] font-semibold text-[hsl(40_20%_92%)]">
-            Luz Astrology
+          <img
+            src="/logo.png"
+            alt="SoSpreadShine logo"
+            className="h-9 w-9 object-contain"
+          />
+          <span className="font-heading text-[22px] font-semibold text-[hsl(0_0%_95%)]">
+            SoSpreadShine
           </span>
         </Link>
 
@@ -140,7 +144,7 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 aria-label={label}
                 className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                style={{ color: "hsl(40 20% 82% / 0.8)" }}
+                style={{ color: "hsl(0 0% 85% / 0.85)" }}
               >
                 <Icon className="w-[18px] h-[18px]" />
               </a>
@@ -168,7 +172,7 @@ const Navbar = () => {
       {mobileOpen && (
         <div
           className="lg:hidden backdrop-blur-xl border-b border-[hsl(40_30%_30%/0.2)] px-5 pb-5 pt-1"
-          style={{ backgroundColor: "hsl(222 47% 8% / 0.95)" }}
+          style={{ backgroundColor: "hsl(0 0% 7% / 0.95)" }}
         >
           {navItems.map((item) =>
             item.isPage ? (
@@ -213,7 +217,7 @@ const Navbar = () => {
                 aria-label={label}
                 onClick={() => setMobileOpen(false)}
                 className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                style={{ color: "hsl(40 20% 82% / 0.8)" }}
+                style={{ color: "hsl(0 0% 85% / 0.85)" }}
               >
                 <Icon className="w-[20px] h-[20px]" />
               </a>
