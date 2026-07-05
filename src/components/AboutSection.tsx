@@ -42,7 +42,7 @@ const AboutSection = () => (
       }}
     />
 
-    <div className="py-20 lg:py-32">
+    <div className="py-14 sm:py-20 lg:py-28">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-5">
           <p className="text-primary text-xs sm:text-sm tracking-[0.3em] uppercase font-medium">

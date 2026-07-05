@@ -100,7 +100,7 @@ const QuoteSection = () => {
 
 
   return (
-    <section id="quote" className="surface-white relative py-20 sm:py-24 lg:py-28 px-5 sm:px-8 lg:px-10">
+    <section id="quote" className="surface-white relative py-16 sm:py-24 lg:py-28 px-5 sm:px-8 lg:px-10">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
