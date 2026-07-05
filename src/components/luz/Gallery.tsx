@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Home as HomeIcon, Car as CarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 
 import driveway from "@/assets/gallery/driveway.jpg";
 import roof from "@/assets/gallery/roof.jpg";
