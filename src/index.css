@@ -67,7 +67,36 @@
     --sidebar-border: 46 25% 22%;
     --sidebar-ring: 46 65% 52%;
   }
+
+  /* Light "surface" scopes for interior sections.
+     Locally rebind the shadcn semantic tokens so any child using
+     bg-background / text-foreground / bg-card / border-border etc.
+     adapts automatically without needing to touch each component. */
+  .surface-white,
+  .surface-cream,
+  .surface-beige {
+    --background: 0 0% 100%;                /* #FFFFFF */
+    --foreground: 0 0% 17%;                 /* #2C2C2C charcoal */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 17%;
+    --secondary: 40 25% 96%;
+    --secondary-foreground: 0 0% 17%;
+    --muted: 36 25% 94%;
+    --muted-foreground: 0 0% 38%;
+    --accent: 40 25% 94%;
+    --accent-foreground: 0 0% 17%;
+    --border: 36 20% 86%;
+    --input: 36 20% 86%;
+    color-scheme: light;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+  .surface-cream { --background: 39 43% 97%; }   /* #FAF8F4 warm off-white */
+  .surface-beige { --background: 36 33% 92%; }   /* #F4F1EA soft beige */
 }
+
 
 body.modal-open { overflow: hidden; }
 
