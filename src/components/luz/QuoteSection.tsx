@@ -130,24 +130,8 @@ const QuoteSection = () => {
             className="rounded-3xl p-6 sm:p-9 bg-white border border-[#E7E7E7] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)]"
           >
             {!submitted ? (
-              <>
-                {/* Phone callout */}
-                <a
-                  href={PHONE_HREF}
-                  aria-label="Call SoSpreadShine at 954-204-6940"
-                  className="flex items-center gap-4 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3.5 mb-6 hover:bg-primary/10 transition-colors"
-                >
-                  <span className="inline-flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-primary/15">
-                    <Phone size={18} className="text-primary" />
-                  </span>
-                  <span className="flex-1 min-w-0">
-                    <span className="block text-xs text-[#6B7280]">Need a faster response?</span>
-                    <span className="block text-base font-semibold text-[#1F2937]">Call (954) 204-6940</span>
-                  </span>
-                  <ArrowRight size={18} className="text-primary shrink-0" />
-                </a>
-
               <form onSubmit={handleSubmit} className="space-y-6">
+
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="q-name" className={labelBase}>Name</label>
