@@ -159,15 +159,21 @@ const Navbar = () => {
               </a>
             ))}
           </div>
+          <a
+            href={PHONE_HREF}
+            className="hidden xl:inline-flex items-center gap-1.5 text-sm font-medium text-[hsl(40_20%_82%)] hover:text-primary transition-colors"
+            aria-label="Call SoSpreadShine"
+          >
+            <Phone size={15} /> (954) 204-6940
+          </a>
           <Button
             variant="gold"
-            className={`rounded-full px-7 h-11 text-sm font-semibold tracking-wide ${
-              location.pathname === '/book' ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
-            }`}
-            onClick={handleBookClick}
+            className="rounded-full px-7 h-11 text-sm font-semibold tracking-wide"
+            onClick={handleQuoteClick}
           >
-            Book
+            Get Quote
           </Button>
+
         </div>
 
         <button
