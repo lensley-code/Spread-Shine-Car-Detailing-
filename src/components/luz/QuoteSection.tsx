@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Mail, Globe, MapPin, Clock, Check } from "lucide-react";
+import { ArrowRight, Phone, MapPin, Clock, Zap, Check } from "lucide-react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+
 
 const serviceOptions = [
   "Auto Detailing",
