@@ -27,11 +27,10 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const navItems = [
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Home", href: "/", isPage: true },
   { label: "Services", href: "/#services" },
-  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Gallery", href: "/#gallery" },
   { label: "About", href: "/about", isPage: true },
-  { label: "FAQ", href: "/faq", isPage: true },
   { label: "Contact", href: "/contact", isPage: true },
 ];
 
