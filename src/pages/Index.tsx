@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import Offerings from "@/components/luz/Offerings";
 import LuzTestimonials from "@/components/luz/Testimonials";
-import LatestFromSocial from "@/components/luz/LatestFromSocial";
+import Gallery from "@/components/luz/Gallery";
 import GuideBanner from "@/components/luz/GuideBanner";
 import { setPageSeo } from "@/lib/seo";
 
@@ -26,7 +26,7 @@ const Index = () => {
       <Offerings />
       <LuzTestimonials />
       <GuideBanner />
-      <LatestFromSocial />
+      <Gallery />
       <AnimatedSection>
         <Footer />
       </AnimatedSection>
