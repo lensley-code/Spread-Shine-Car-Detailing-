@@ -51,7 +51,7 @@ function ServiceCard({
 }) {
   return (
     <article className="grid grid-cols-1 sm:grid-cols-5 rounded-2xl overflow-hidden bg-card shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)] border border-border/60">
-      <div className="sm:col-span-2 relative bg-muted sm:min-h-[420px]">
+      <div className="sm:col-span-2 relative bg-muted aspect-[4/3] sm:aspect-auto sm:min-h-[420px]">
         <img
           src={image}
           alt={imageAlt}
