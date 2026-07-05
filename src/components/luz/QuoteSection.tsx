@@ -188,7 +188,7 @@ const QuoteSection = () => {
                   <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </form>
-              </>
+
             ) : (
               <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-10">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 mb-5">
