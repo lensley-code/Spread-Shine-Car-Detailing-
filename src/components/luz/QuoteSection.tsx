@@ -31,7 +31,7 @@ const quoteSchema = z.object({
   message: z.string().trim().max(2000).optional(),
 });
 
-);
+
 
 const QuoteSection = () => {
   const [submitted, setSubmitted] = useState(false);
