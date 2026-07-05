@@ -1,10 +1,13 @@
-import { Check, Car, Home as HomeIcon, Sparkles, MapPin } from "lucide-react";
+import { useState } from "react";
+import { Check, Car, Home as HomeIcon, Sparkles, MapPin, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import autoImgAsset from "@/assets/services/auto-detailing.jpg.asset.json";
 import homeImgAsset from "@/assets/services/exterior-home.jpg.asset.json";
 
 const autoImg = autoImgAsset.url;
 const homeImg = homeImgAsset.url;
+
+const MOBILE_VISIBLE = 3;
 
 const autoItems = [
   "Exterior Hand Wash",
@@ -49,6 +52,10 @@ function ServiceCard({
   description: string;
   items: string[];
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const hiddenCount = Math.max(0, items.length - MOBILE_VISIBLE);
+  const visibleItems = expanded ? items : items.slice(0, MOBILE_VISIBLE);
+
   return (
     <article className="grid grid-cols-1 sm:grid-cols-5 rounded-2xl overflow-hidden bg-card shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)] border border-border/60">
       <div className="sm:col-span-2 relative bg-muted aspect-[4/3] sm:aspect-auto sm:min-h-[420px]">
@@ -61,14 +68,42 @@ function ServiceCard({
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div className="sm:col-span-3 p-6 sm:p-8 lg:p-10 flex flex-col">
+      <div className="sm:col-span-3 p-5 sm:p-8 lg:p-10 flex flex-col">
         <h3 className="font-heading text-2xl lg:text-3xl font-semibold text-foreground mb-2">
           {title}
         </h3>
         <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
           {description}
         </p>
-        <ul className="space-y-2.5 flex-1">
+
+        {/* Mobile: show only first 3, expandable. Desktop: show all. */}
+        <ul className="space-y-2.5 flex-1 sm:hidden">
+          {visibleItems.map((it) => (
+            <li key={it} className="flex items-start gap-2.5 text-sm text-foreground/85">
+              <span
+                aria-hidden="true"
+                className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-primary shrink-0"
+              >
+                <Check size={12} strokeWidth={3} />
+              </span>
+              <span>{it}</span>
+            </li>
+          ))}
+          {hiddenCount > 0 && (
+            <li>
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
+                aria-expanded={expanded}
+              >
+                <Plus size={14} className={`transition-transform ${expanded ? "rotate-45" : ""}`} />
+                {expanded ? "Show less" : `+${hiddenCount} more services`}
+              </button>
+            </li>
+          )}
+        </ul>
+        <ul className="hidden sm:block space-y-2.5 flex-1">
           {items.map((it) => (
             <li key={it} className="flex items-start gap-2.5 text-sm text-foreground/85">
               <span
@@ -81,6 +116,7 @@ function ServiceCard({
             </li>
           ))}
         </ul>
+
         <div className="mt-6">
           <Button
             variant="gold-outline"
@@ -99,7 +135,7 @@ export default function Offerings() {
   return (
     <section
       id="services"
-      className="surface-cream relative w-full py-14 sm:py-20 lg:py-24 px-5 sm:px-8 lg:px-10"
+      className="surface-cream relative w-full py-14 sm:py-20 lg:py-24 px-4 sm:px-8 lg:px-10"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}

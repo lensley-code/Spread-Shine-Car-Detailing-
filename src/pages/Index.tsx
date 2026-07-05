@@ -9,6 +9,7 @@ import Offerings from "@/components/luz/Offerings";
 import Gallery from "@/components/luz/Gallery";
 import QuoteSection from "@/components/luz/QuoteSection";
 import FinalCTABand from "@/components/luz/FinalCTABand";
+import StickyMobileCTA from "@/components/luz/StickyMobileCTA";
 import { setPageSeo } from "@/lib/seo";
 
 // Premium neutral palette anchors
@@ -52,6 +53,8 @@ const Index = () => {
       <AnimatedSection>
         <Footer />
       </AnimatedSection>
+
+      <StickyMobileCTA />
     </div>
   );
 };
