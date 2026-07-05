@@ -161,12 +161,13 @@ export default function Gallery() {
             Get a free quote today and let SoSpreadShine bring back the shine.
           </p>
           <Button
-            onClick={() => navigate("/contact")}
+            onClick={scrollToQuote}
             size="lg"
-            className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold tracking-wide rounded-full shadow-lg hover:shadow-primary/30 transition-all"
+            className="mt-8 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold tracking-wide rounded-full shadow-lg hover:shadow-primary/30 transition-all"
           >
             Get My Free Quote
           </Button>
+
         </div>
       </div>
     </section>
