@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import FeaturesSection from "@/components/FeaturesSection";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import Offerings from "@/components/luz/Offerings";
-import LuzTestimonials from "@/components/luz/Testimonials";
 import Gallery from "@/components/luz/Gallery";
-import GuideBanner from "@/components/luz/GuideBanner";
+import QuoteSection from "@/components/luz/QuoteSection";
+import FinalCTABand from "@/components/luz/FinalCTABand";
 import { setPageSeo } from "@/lib/seo";
 
 const Index = () => {
@@ -18,15 +17,26 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      {/* 1. Hero — Who are you? What do you do? */}
       <HeroSection />
-      <AboutSection />
-      <AnimatedSection>
-        <FeaturesSection />
-      </AnimatedSection>
+
+      {/* 2. Services — Can you solve my problem? */}
       <Offerings />
-      <LuzTestimonials />
-      <GuideBanner />
+
+      {/* 3. Why Choose SoSpreadShine — Why trust you? */}
+      <AnimatedSection>
+        <AboutSection />
+      </AnimatedSection>
+
+      {/* 4. Before & After Gallery — Proof */}
       <Gallery />
+
+      {/* 5. Request Your Free Quote — How do I hire you? */}
+      <QuoteSection />
+
+      {/* Sticky final CTA band */}
+      <FinalCTABand />
+
       <AnimatedSection>
         <Footer />
       </AnimatedSection>
