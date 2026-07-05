@@ -8,101 +8,95 @@
   :root {
     color-scheme: dark;
 
-    /* SoSpreadShine — premium automotive detailing palette */
-    --background: 0 0% 7%;          /* #111111 */
+    /* SoSpreadShine — modern luxury automotive palette
+       Dark base for hero + footer; light sections use .surface-white below. */
+    --background: 0 0% 7%;          /* #111111 charcoal */
     --foreground: 0 0% 100%;        /* #FFFFFF */
 
-    --card: 0 0% 11%;               /* #1B1B1B */
+    --card: 0 0% 10%;               /* #1A1A1A */
     --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 11%;
+    --popover: 0 0% 10%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 46 65% 52%;          /* #D4AF37 metallic gold */
+    --primary: 45 68% 47%;          /* #C9A227 refined gold */
     --primary-foreground: 0 0% 7%;
 
     --secondary: 0 0% 11%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 85%;   /* #D9D9D9 */
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 78%;
 
-    --accent: 46 65% 52%;
+    --accent: 45 68% 47%;
     --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 46 25% 22%;
-    --input: 0 0% 15%;
-    --ring: 46 65% 52%;
+    --border: 0 0% 18%;
+    --input: 0 0% 14%;
+    --ring: 45 68% 47%;
 
     --radius: 0.5rem;
 
     /* Legacy custom color vars kept in sync with the new brand */
-    --color-gold: #D4AF37;
-    --color-gold-light: #F5E6A8;
+    --color-gold: #C9A227;
+    --color-gold-light: #E5C24E;
     --color-navy: #111111;
-    --color-navy-dark: #000000;
+    --color-navy-dark: #0D0D0D;
     --color-text: #FFFFFF;
     --color-text-light: #D9D9D9;
     --color-bg: #111111;
-    --color-white: #1B1B1B;         /* used as card/modal surface — now dark */
-    --color-border: #2a2a2a;
+    --color-white: #1A1A1A;
+    --color-border: #232323;
     --font-serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-    --gold: 46 65% 52%;
-    --gold-light: 47 78% 81%;
-    --gold-dark: 46 55% 38%;
+    --gold: 45 68% 47%;
+    --gold-light: 45 72% 60%;
+    --gold-dark: 45 65% 38%;
     --navy: 0 0% 7%;
     --navy-light: 0 0% 11%;
 
     --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 46 65% 52%;
+    --sidebar-primary: 45 68% 47%;
     --sidebar-primary-foreground: 0 0% 7%;
     --sidebar-accent: 0 0% 11%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 46 25% 22%;
-    --sidebar-ring: 46 65% 52%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 45 68% 47%;
   }
 
-  /* Light "surface" scopes for interior sections.
-     Locally rebind the shadcn semantic tokens so any child using
-     bg-background / text-foreground / bg-card / border-border etc.
-     adapts automatically without needing to touch each component.
-
-     Palette (SoSpreadShine premium neutral):
-       .surface-white → #FFFFFF   pure white
-       .surface-cream → #F8F9FA   soft white
-       .surface-beige → #F3F4F6   light gray
-       text            → #1F2937  charcoal */
+  /* Light surface scopes for interior sections.
+     Modern luxury palette — pure white base, charcoal text, minimal gold.
+     All three tokens intentionally map to the same clean white system so
+     legacy .surface-cream / .surface-beige usages no longer render as beige. */
   .surface-white,
   .surface-cream,
   .surface-beige {
-    --background: 0 0% 100%;                /* #FFFFFF */
-    --foreground: 220 26% 17%;              /* #1F2937 charcoal */
+    --background: 0 0% 100%;                /* #FFFFFF pure white */
+    --foreground: 0 0% 14%;                 /* #232323 primary text */
     --card: 0 0% 100%;
-    --card-foreground: 220 26% 17%;
+    --card-foreground: 0 0% 14%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 26% 17%;
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 26% 17%;
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
-    --accent: 220 14% 96%;
-    --accent-foreground: 220 26% 17%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --popover-foreground: 0 0% 14%;
+    --secondary: 0 0% 98%;                  /* #FAFAFA */
+    --secondary-foreground: 0 0% 14%;
+    --muted: 0 0% 97%;                      /* #F8F9FA soft white */
+    --muted-foreground: 0 0% 40%;           /* #666666 secondary text */
+    --accent: 0 0% 97%;
+    --accent-foreground: 0 0% 14%;
+    --border: 0 0% 92%;                     /* #EAEAEA */
+    --input: 0 0% 92%;
     color-scheme: light;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
-  .surface-cream { --background: 210 17% 98%; }   /* #F8F9FA soft white */
-  .surface-beige { --background: 220 14% 96%; }   /* #F3F4F6 light gray */
 
 }
+
 
 
 body.modal-open { overflow: hidden; }
