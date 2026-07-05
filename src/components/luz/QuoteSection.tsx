@@ -94,9 +94,10 @@ const QuoteSection = () => {
   };
 
   const inputBase =
-    "w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300 bg-background border border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/30";
+    "w-full rounded-xl px-4 py-3.5 min-h-[48px] font-body text-base sm:text-sm outline-none transition-all duration-300 bg-background border border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/30";
   const labelBase =
     "block text-xs uppercase tracking-[0.15em] mb-2 font-semibold text-muted-foreground";
+
 
   return (
     <section id="quote" className="relative py-20 sm:py-24 lg:py-28 px-5 sm:px-8 lg:px-10" style={{ backgroundColor: "hsl(0 0% 9%)" }}>
