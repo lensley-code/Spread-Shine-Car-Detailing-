@@ -28,7 +28,7 @@ const SectionDivider = ({
         viewBox="0 0 1440 80"
         preserveAspectRatio="none"
         className="block w-full h-[36px] sm:h-[56px] md:h-[72px]"
-        style={{ height: undefined, maxHeight: height }}
+        style={{ maxHeight: height }}
       >
         {/* Fills the top portion with `from`, arcing gently down into `to`. */}
         <path
