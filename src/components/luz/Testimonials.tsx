@@ -136,8 +136,8 @@ export default function Testimonials() {
       )}
 
       <div className="testimonials-cta">
-        <a href="/book" className="testimonials-cta-btn">
-          Book Your Reading →
+        <a href="/#quote" className="testimonials-cta-btn">
+          Request a Free Quote →
         </a>
       </div>
     </section>
