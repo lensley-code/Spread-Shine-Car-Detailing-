@@ -1,7 +1,10 @@
 import { Check, Car, Home as HomeIcon, Sparkles, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import autoImg from "@/assets/gallery/auto-detail.jpg";
-import homeImg from "@/assets/gallery/house-wash.jpg";
+import autoImgAsset from "@/assets/services/auto-detailing.jpg.asset.json";
+import homeImgAsset from "@/assets/services/exterior-home.jpg.asset.json";
+
+const autoImg = autoImgAsset.url;
+const homeImg = homeImgAsset.url;
 
 const autoItems = [
   "Exterior Hand Wash",
@@ -48,14 +51,14 @@ function ServiceCard({
 }) {
   return (
     <article className="grid grid-cols-1 sm:grid-cols-5 rounded-2xl overflow-hidden bg-card shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)] border border-border/60">
-      <div className="sm:col-span-2 relative">
+      <div className="sm:col-span-2 relative bg-muted aspect-[4/3] sm:aspect-auto sm:min-h-[420px]">
         <img
           src={image}
           alt={imageAlt}
           loading="lazy"
-          width={800}
-          height={1000}
-          className="w-full h-full object-cover aspect-[4/3] sm:aspect-auto sm:min-h-full"
+          width={1200}
+          height={900}
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
       <div className="sm:col-span-3 p-6 sm:p-8 lg:p-10 flex flex-col">
