@@ -135,8 +135,9 @@ export default function Offerings() {
   return (
     <section
       id="services"
-      className="surface-cream relative w-full py-14 sm:py-20 lg:py-24 px-4 sm:px-8 lg:px-10"
+      className="surface-white relative w-full py-14 sm:py-20 lg:py-24 px-4 sm:px-8 lg:px-10"
     >
+
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">

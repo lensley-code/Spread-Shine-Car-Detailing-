@@ -11,10 +11,10 @@ import FinalCTABand from "@/components/luz/FinalCTABand";
 import StickyMobileCTA from "@/components/luz/StickyMobileCTA";
 import { setPageSeo } from "@/lib/seo";
 
-// Premium neutral palette anchors
+// Palette anchors — dark for hero/footer, white for all content sections.
 const DARK = "#111111";
 const WHITE = "#FFFFFF";
-const SOFT_WHITE = "#F8F9FA";
+const SOFT_GRAY = "#F8F9FA";
 
 const Index = () => {
   useEffect(() => {
@@ -23,23 +23,27 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      {/* 1. Hero */}
+      {/* 1. Hero (dark) */}
       <HeroSection />
-      <SectionDivider from={DARK} to={SOFT_WHITE} className="-mt-px relative z-0" />
+      {/* Dark → white: keep curved seam for clean contrast */}
+      <SectionDivider from={DARK} to={WHITE} soft={false} className="-mt-px relative z-0" />
 
-      {/* 2. Services */}
+      {/* 2. Services (white) */}
       <Offerings />
-      <SectionDivider from={SOFT_WHITE} to={WHITE} />
+      {/* Subtle white → soft-gray fade */}
+      <SectionDivider from={WHITE} to={SOFT_GRAY} height={48} />
 
-      {/* 3. Why Choose SoSpreadShine */}
+      {/* 3. Why Choose SoSpreadShine (white, sits on soft-gray) */}
       <AnimatedSection>
         <AboutSection />
       </AnimatedSection>
-      <SectionDivider from={WHITE} to={SOFT_WHITE} />
+      {/* Soft-gray → white fade */}
+      <SectionDivider from={SOFT_GRAY} to={WHITE} height={48} />
 
-      {/* 4. Request Your Free Quote */}
+      {/* 4. Request Your Free Quote (white) */}
       <QuoteSection />
-      <SectionDivider from={WHITE} to={DARK} />
+      {/* White → dark: curved seam into footer band */}
+      <SectionDivider from={WHITE} to={DARK} soft={false} />
 
       {/* Sticky final CTA band (desktop) */}
       <FinalCTABand />
@@ -54,3 +58,4 @@ const Index = () => {
 };
 
 export default Index;
+

@@ -1,23 +1,43 @@
 interface SectionDividerProps {
-  /** Color of the section above the divider (the curve fill). */
+  /** Color of the section above the divider. */
   from: string;
-  /** Color of the section below the divider (the divider background). */
+  /** Color of the section below the divider. */
   to: string;
-  /** Height of the curve on desktop. Mobile scales down automatically. */
+  /** Height of the divider in px on desktop. */
   height?: number;
   className?: string;
+  /** If true (default), render as a soft vertical gradient fade with no curve.
+   *  Set to false to render the legacy curved arc (used for dark ↔ light transitions). */
+  soft?: boolean;
 }
 
 /**
- * Subtle full-width curved transition between two sections.
- * Renders the "from" color as a gentle arc dipping into the "to" color.
+ * Section transition. Two modes:
+ *  - soft (default): a very subtle vertical gradient from `from` → `to`. Feels
+ *    almost invisible; best between two light sections.
+ *  - curved: a gentle full-width arc — used when transitioning between dark
+ *    and light surfaces where a clean seam is desirable.
  */
 const SectionDivider = ({
   from,
   to,
-  height = 80,
+  height = 64,
   className = "",
+  soft = true,
 }: SectionDividerProps) => {
+  if (soft) {
+    return (
+      <div
+        aria-hidden="true"
+        className={`w-full ${className}`}
+        style={{
+          height,
+          background: `linear-gradient(to bottom, ${from} 0%, ${to} 100%)`,
+        }}
+      />
+    );
+  }
+
   return (
     <div
       aria-hidden="true"
@@ -30,7 +50,6 @@ const SectionDivider = ({
         className="block w-full h-[36px] sm:h-[56px] md:h-[72px]"
         style={{ maxHeight: height }}
       >
-        {/* Fills the top portion with `from`, arcing gently down into `to`. */}
         <path
           d="M0,0 L1440,0 L1440,36 C1080,80 360,80 0,36 Z"
           fill={from}
