@@ -209,48 +209,52 @@ const QuoteSection = () => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="flex flex-col gap-5"
           >
-            <div className="rounded-3xl p-6 sm:p-8 bg-card border border-border shadow-xl shadow-black/20">
-              <div className="pb-6 border-b border-border">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                    <Phone size={18} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-semibold">Call Us</p>
-                    <p className="font-heading text-lg font-semibold">{PHONE}</p>
-                  </div>
-                </div>
-                <a href={PHONE_HREF}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                  <Phone size={15} /> Call Now
+            <div className="rounded-3xl p-8 sm:p-10 bg-card border border-border shadow-xl shadow-black/20 text-center">
+              <h3 className="font-heading text-2xl sm:text-3xl font-semibold mb-3">Prefer to Talk?</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-sm mx-auto">
+                Need an immediate response? Give us a call and we'll be happy to help.
+              </p>
+
+              <div className="flex flex-col items-center gap-2 mb-8">
+                <span className="inline-flex w-14 h-14 items-center justify-center rounded-full bg-primary/15">
+                  <Phone size={22} className="text-primary" />
+                </span>
+                <a
+                  href={PHONE_HREF}
+                  aria-label="Call SoSpreadShine at 954-204-6940"
+                  className="font-heading text-2xl sm:text-3xl font-semibold hover:text-primary transition-colors"
+                >
+                  {PHONE}
                 </a>
               </div>
-              <InfoRow icon={<Mail size={18} className="text-primary" />} label="Email">
-                <a href={`mailto:${EMAIL}`} className="hover:text-primary transition-colors break-all">{EMAIL}</a>
-              </InfoRow>
-              <InfoRow icon={<Globe size={18} className="text-primary" />} label="Website">
-                <a href={`https://${WEBSITE}`} className="hover:text-primary transition-colors">{WEBSITE}</a>
-              </InfoRow>
-              <InfoRow icon={<MapPin size={18} className="text-primary" />} label="Service Area">
-                Proudly Serving South Florida
-              </InfoRow>
-              <InfoRow icon={<Clock size={18} className="text-primary" />} label="Business Hours" last>
-                <div className="space-y-1">
-                  <div className="flex justify-between gap-4"><span>Monday–Saturday</span><span className="text-muted-foreground">8:00 AM – 6:00 PM</span></div>
-                  <div className="flex justify-between gap-4"><span>Sunday</span><span className="text-muted-foreground">By Appointment</span></div>
+
+              <a
+                href={PHONE_HREF}
+                aria-label="Call SoSpreadShine at 954-204-6940"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full h-14 px-8 text-base font-semibold bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 mb-8"
+              >
+                <Phone size={18} /> Call Now
+              </a>
+
+              <div className="pt-6 border-t border-border space-y-4 text-left max-w-xs mx-auto">
+                <div className="flex items-start gap-3">
+                  <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
+                  <span className="text-sm">Proudly Serving South Florida</span>
                 </div>
-              </InfoRow>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {trustBadges.map((badge) => (
-                <div key={badge} className="flex items-center gap-2 rounded-xl bg-card border border-border px-4 py-3 hover:border-primary/50 transition-colors">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/15">
-                    <Check size={13} className="text-primary" strokeWidth={3} />
-                  </span>
-                  <span className="text-sm font-medium">{badge}</span>
+                <div className="flex items-start gap-3">
+                  <Clock size={18} className="text-primary shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <div>Monday–Saturday</div>
+                    <div className="text-muted-foreground">8:00 AM – 6:00 PM</div>
+                  </div>
                 </div>
-              ))}
+                <div className="flex items-start gap-3">
+                  <Zap size={18} className="text-primary shrink-0 mt-0.5" />
+                  <span className="text-sm">Fast Response Times</span>
+                </div>
+              </div>
             </div>
+
           </motion.div>
         </div>
       </div>
