@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Home as HomeIcon, Car as CarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 
 import driveway from "@/assets/gallery/driveway.jpg";
 import roof from "@/assets/gallery/roof.jpg";
@@ -44,8 +44,10 @@ const FILTERS: { key: "all" | Category; label: string }[] = [
 ];
 
 export default function Gallery() {
-  const navigate = useNavigate();
   const [active, setActive] = useState<"all" | Category>("all");
+  const scrollToQuote = () =>
+    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
+
 
   const items = useMemo(
     () => (active === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === active)),
@@ -66,7 +68,7 @@ export default function Gallery() {
 
         {/* Filters — segmented control */}
         <div className="flex justify-center mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-1 p-1 rounded-full border border-border bg-card/60 backdrop-blur">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1 p-1 rounded-full border border-border bg-card/60 backdrop-blur max-w-full">
             {FILTERS.map((f) => {
               const isActive = active === f.key;
               return (
@@ -74,7 +76,7 @@ export default function Gallery() {
                   key={f.key}
                   onClick={() => setActive(f.key)}
                   className={[
-                    "px-5 md:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300",
+                    "px-4 sm:px-5 md:px-6 py-2.5 min-h-[44px] rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap",
                     isActive
                       ? "bg-primary text-primary-foreground shadow-md"
                       : "text-muted-foreground hover:text-foreground",
@@ -87,6 +89,7 @@ export default function Gallery() {
             })}
           </div>
         </div>
+
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
@@ -159,12 +162,13 @@ export default function Gallery() {
             Get a free quote today and let SoSpreadShine bring back the shine.
           </p>
           <Button
-            onClick={() => navigate("/contact")}
+            onClick={scrollToQuote}
             size="lg"
-            className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold tracking-wide rounded-full shadow-lg hover:shadow-primary/30 transition-all"
+            className="mt-8 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-semibold tracking-wide rounded-full shadow-lg hover:shadow-primary/30 transition-all"
           >
             Get My Free Quote
           </Button>
+
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Instagram, Twitter } from "lucide-react";
+import { Menu, X, Instagram, Twitter, Phone } from "lucide-react";
 import { SOCIAL_PROFILES } from "@/config/latestSocialPosts";
 
 // TikTok icon (Lucide doesn't ship one — minimal inline SVG matching Lucide style)
@@ -24,7 +24,9 @@ const SOCIAL_LINKS = [
   { href: SOCIAL_PROFILES.instagram, label: "Instagram", Icon: Instagram },
   { href: SOCIAL_PROFILES.tiktok, label: "TikTok", Icon: TikTokIcon },
   { href: SOCIAL_PROFILES.x, label: "X (Twitter)", Icon: Twitter },
-] as const;
+].filter((s) => !!s.href) as ReadonlyArray<{ href: string; label: string; Icon: typeof Instagram }>;
+
+const PHONE_HREF = "tel:9542046940";
 
 const navItems = [
   { label: "Home", href: "/", isPage: true },
@@ -54,9 +56,16 @@ const Navbar = () => {
     }
   };
 
-  const handleBookClick = () => {
+  const handleQuoteClick = () => {
     setMobileOpen(false);
-    navigate("/book");
+    if (location.pathname === "/") {
+      document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
   };
 
   const isActivePage = (href: string) => {
@@ -74,12 +83,13 @@ const Navbar = () => {
 
   const getMobileLinkClasses = (item: typeof navItems[0]) => {
     const isActive = item.isPage && isActivePage(item.href);
-    return `block py-3.5 text-sm font-medium tracking-wide transition-all duration-300
+    return `block py-4 text-base font-medium tracking-wide transition-all duration-300 min-h-[48px]
       ${isActive
         ? "text-primary"
         : "text-[hsl(40_20%_82%)] hover:text-[hsl(40_60%_75%)]"
       }`;
   };
+
 
   return (
     <nav
@@ -149,15 +159,21 @@ const Navbar = () => {
               </a>
             ))}
           </div>
+          <a
+            href={PHONE_HREF}
+            className="hidden xl:inline-flex items-center gap-1.5 text-sm font-medium text-[hsl(40_20%_82%)] hover:text-primary transition-colors"
+            aria-label="Call SoSpreadShine"
+          >
+            <Phone size={15} /> (954) 204-6940
+          </a>
           <Button
             variant="gold"
-            className={`rounded-full px-7 h-11 text-sm font-semibold tracking-wide ${
-              location.pathname === '/book' ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
-            }`}
-            onClick={handleBookClick}
+            className="rounded-full px-7 h-11 text-sm font-semibold tracking-wide"
+            onClick={handleQuoteClick}
           >
-            Book
+            Get Quote
           </Button>
+
         </div>
 
         <button
@@ -197,13 +213,21 @@ const Navbar = () => {
               </a>
             )
           )}
+          <a
+            href={PHONE_HREF}
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 flex items-center justify-center gap-2 rounded-full h-12 px-6 border-2 border-primary text-primary text-sm font-semibold tracking-wide"
+          >
+            <Phone size={16} /> Call (954) 204-6940
+          </a>
           <Button
             variant="gold"
-            className="rounded-full px-7 h-11 text-sm font-semibold tracking-wide mt-3 w-full"
-            onClick={handleBookClick}
+            className="rounded-full px-7 h-12 text-sm font-semibold tracking-wide mt-3 w-full"
+            onClick={handleQuoteClick}
           >
-            Book
+            Get My Free Quote
           </Button>
+
 
           {/* Mobile social icons */}
           <div className="flex items-center justify-center gap-6 pt-5 mt-4 border-t border-[hsl(40_30%_30%/0.2)]">

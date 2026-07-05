@@ -71,7 +71,17 @@
 
 body.modal-open { overflow: hidden; }
 
-html { color-scheme: dark; }
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 @layer base {
   * {
@@ -80,9 +90,22 @@ html { color-scheme: dark; }
 
   body {
     @apply bg-background text-foreground font-body;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
+
+  /* Prevent iOS Safari from auto-zooming when focusing form fields.
+     Inputs must be >= 16px on mobile. */
+  @media (max-width: 640px) {
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
 }
+

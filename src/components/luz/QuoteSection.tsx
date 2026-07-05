@@ -94,9 +94,10 @@ const QuoteSection = () => {
   };
 
   const inputBase =
-    "w-full rounded-xl px-4 py-3 font-body text-sm outline-none transition-all duration-300 bg-background border border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/30";
+    "w-full rounded-xl px-4 py-3.5 min-h-[48px] font-body text-base sm:text-sm outline-none transition-all duration-300 bg-background border border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/30";
   const labelBase =
     "block text-xs uppercase tracking-[0.15em] mb-2 font-semibold text-muted-foreground";
+
 
   return (
     <section id="quote" className="relative py-20 sm:py-24 lg:py-28 px-5 sm:px-8 lg:px-10" style={{ backgroundColor: "hsl(0 0% 9%)" }}>
@@ -133,11 +134,13 @@ const QuoteSection = () => {
                   <div>
                     <label htmlFor="q-name" className={labelBase}>Full Name *</label>
                     <input id="q-name" name="name" type="text" required maxLength={100}
+                      autoComplete="name"
                       value={form.name} onChange={handleChange} className={inputBase} placeholder="Your name" />
                   </div>
                   <div>
                     <label htmlFor="q-phone" className={labelBase}>Phone Number *</label>
                     <input id="q-phone" name="phone" type="tel" required maxLength={30}
+                      inputMode="tel" autoComplete="tel"
                       value={form.phone} onChange={handleChange} className={inputBase} placeholder="(555) 555-5555" />
                   </div>
                 </div>
@@ -145,6 +148,7 @@ const QuoteSection = () => {
                   <div>
                     <label htmlFor="q-email" className={labelBase}>Email Address</label>
                     <input id="q-email" name="email" type="email" maxLength={255}
+                      inputMode="email" autoComplete="email" autoCapitalize="off" spellCheck={false}
                       value={form.email} onChange={handleChange} className={inputBase} placeholder="you@email.com" />
                   </div>
                   <div>
@@ -162,15 +166,17 @@ const QuoteSection = () => {
                 <div>
                   <label htmlFor="q-address" className={labelBase}>Property Address</label>
                   <input id="q-address" name="address" type="text" maxLength={200}
+                    autoComplete="street-address"
                     value={form.address} onChange={handleChange} className={inputBase} placeholder="Street, City, ZIP" />
                 </div>
                 <div>
                   <label htmlFor="q-message" className={labelBase}>Message</label>
                   <textarea id="q-message" name="message" rows={4} maxLength={2000}
                     value={form.message} onChange={handleChange}
-                    className={`${inputBase} resize-none`}
+                    className={`${inputBase} resize-none min-h-[120px]`}
                     placeholder="Tell us a bit about your project..." />
                 </div>
+
                 <button
                   type="submit"
                   disabled={submitting}

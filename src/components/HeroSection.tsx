@@ -54,17 +54,17 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-row flex-wrap gap-3 sm:gap-4 mb-7 sm:mb-9">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-7 sm:mb-9">
             <Button
               variant="gold"
-              className="rounded-full h-11 px-6 sm:px-8 text-xs sm:text-sm"
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto rounded-full h-12 sm:h-11 px-6 sm:px-8 text-sm"
+              onClick={() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })}
             >
               GET A FREE QUOTE
             </Button>
             <Button
               variant="gold-outline"
-              className="rounded-full h-11 px-6 sm:px-8 text-xs sm:text-sm inline-flex items-center gap-2"
+              className="w-full sm:w-auto rounded-full h-12 sm:h-11 px-6 sm:px-8 text-sm inline-flex items-center justify-center gap-2"
               asChild
             >
               <a href="tel:+19542046940">
@@ -73,6 +73,7 @@ const HeroSection = () => {
               </a>
             </Button>
           </div>
+
 
           {/* Trust indicators */}
           <ul className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-5 gap-y-2.5 sm:gap-x-6">
