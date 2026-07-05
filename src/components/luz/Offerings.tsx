@@ -1,124 +1,126 @@
-
-import {
-  Car,
-  Sparkles,
-  ShieldCheck,
-  Wrench,
-  Sun,
-  LifeBuoy,
-  Disc,
-  Gauge,
-  Droplet,
-  Home,
-  CloudRain,
-  Truck,
-  Footprints,
-  Waves,
-  Trees,
-  PaintBucket,
-  Leaf,
-  type LucideIcon,
-} from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import autoImg from "@/assets/hero-detailing.jpg";
+import homeImg from "@/assets/gallery/house-wash.jpg";
 
-type Service = {
-  title: string;
-  description: string;
-  Icon: LucideIcon;
-};
-
-const autoServices: Service[] = [
-  { title: "Exterior Hand Wash", description: "Gentle, streak-free hand wash that protects your paint and restores gloss.", Icon: Droplet },
-  { title: "Interior Detailing", description: "Deep vacuum, upholstery care, and surface cleaning for a like-new cabin.", Icon: Sparkles },
-  { title: "Full Detail Packages", description: "Complete inside-and-out detailing for a showroom-quality finish.", Icon: Car },
-  { title: "Engine Bay Cleaning", description: "Safe degreasing and dressing to keep your engine bay looking pristine.", Icon: Wrench },
-  { title: "Headlight Restoration", description: "Clear away oxidation and haze to restore bright, safer visibility at night.", Icon: Sun },
-  { title: "Flat Tire Assistance", description: "Fast on-the-spot tire changes so you can get back on the road quickly.", Icon: LifeBuoy },
-  { title: "Brake Pad Replacement", description: "Reliable brake pad service using quality parts for confident stopping power.", Icon: Disc },
-  { title: "Vehicle Diagnostics", description: "Professional inspection and diagnostic scans to pinpoint issues accurately.", Icon: Gauge },
-  { title: "Oil Change", description: "Quick, clean oil and filter changes to keep your engine running smoothly.", Icon: ShieldCheck },
+const autoItems = [
+  "Exterior Hand Wash",
+  "Interior Detailing",
+  "Full Detail Packages",
+  "Engine Bay Cleaning",
+  "Headlight Restoration",
+  "Maintenance Services (Oil Changes, Brake Pads, Tire Assistance, Diagnostics)",
 ];
 
-const homeServices: Service[] = [
-  { title: "House Washing", description: "Soft wash treatments that safely remove dirt, mildew, and grime from siding.", Icon: Home },
-  { title: "Roof Cleaning", description: "Gentle roof cleaning that eliminates stains and extends shingle life.", Icon: CloudRain },
-  { title: "Driveway Cleaning", description: "High-powered cleaning that lifts oil, tire marks, and years of buildup.", Icon: Truck },
-  { title: "Sidewalk Cleaning", description: "Refresh walkways and entry paths for a sharper, cleaner curb appeal.", Icon: Footprints },
-  { title: "Patio & Pool Deck Cleaning", description: "Restore outdoor living spaces with thorough, surface-safe cleaning.", Icon: Waves },
-  { title: "Outdoor Surface Cleaning", description: "Fences, retaining walls, and exterior surfaces cleaned with precision.", Icon: Trees },
-  { title: "Painting", description: "Clean, even paint application for exteriors and touch-ups done right.", Icon: PaintBucket },
-  { title: "Lawn Care & Landscaping", description: "Regular maintenance and detailing that keeps your yard looking its best.", Icon: Leaf },
+const homeItems = [
+  "House Washing",
+  "Roof Cleaning",
+  "Driveways",
+  "Sidewalks",
+  "Pool Decks",
+  "Outdoor Surfaces",
+  "Painting",
+  "Lawn Care & Landscaping",
 ];
 
-function ServiceCard({ service }: { service: Service }) {
-  const { Icon, title, description } = service;
+const scrollToQuote = () =>
+  document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
+
+function Checklist({ items }: { items: string[] }) {
   return (
-    <article
-      className="group relative rounded-2xl border border-border/60 bg-card p-6 sm:p-7 transition-all duration-300 ease-out
-                 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.35)]"
-    >
-      <div
-        className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary
-                   transition-colors duration-300 group-hover:bg-primary/15"
-      >
-        <Icon size={22} strokeWidth={1.6} />
-      </div>
-      <h3 className="font-heading text-lg sm:text-xl font-semibold text-foreground mb-2 leading-snug">
-        {title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {description}
-      </p>
-    </article>
+    <ul className="mt-8 space-y-3.5">
+      {items.map((it) => (
+        <li
+          key={it}
+          className="flex items-start gap-3 text-[0.95rem] leading-relaxed text-foreground/85"
+        >
+          <span
+            aria-hidden="true"
+            className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full border border-primary/45 text-primary shrink-0"
+          >
+            <Check size={12} strokeWidth={2.75} />
+          </span>
+          <span>{it}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function CategoryBlock({
-  emoji,
-  title,
-  services,
+function FeatureRow({
+  eyebrow,
+  heading,
+  description,
+  items,
+  image,
+  imageAlt,
+  reverse,
 }: {
-  emoji: string;
-  title: string;
-  services: Service[];
+  eyebrow: string;
+  heading: string;
+  description: string;
+  items: string[];
+  image: string;
+  imageAlt: string;
+  reverse?: boolean;
 }) {
   return (
-    <div>
-      <div className="flex items-center justify-center gap-3 mb-8 sm:mb-10">
-        <span className="text-2xl sm:text-3xl" aria-hidden="true">
-          {emoji}
-        </span>
-        <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-foreground tracking-tight">
-          {title}
-        </h3>
-        <span
-          className="hidden sm:block h-px w-16 bg-gradient-to-r from-primary/50 to-transparent ml-2"
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      {/* Image */}
+      <div className={`relative ${reverse ? "lg:order-2" : "lg:order-1"}`}>
+        <div
           aria-hidden="true"
+          className="absolute -inset-4 bg-primary/10 rounded-[2rem] blur-2xl opacity-60"
         />
+        <div className="relative overflow-hidden rounded-3xl border border-primary/20 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]">
+          <img
+            src={image}
+            alt={imageAlt}
+            loading="lazy"
+            width={1200}
+            height={1500}
+            className="w-full h-full object-cover aspect-[4/5]"
+          />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-        {services.map((service) => (
-          <ServiceCard key={service.title} service={service} />
-        ))}
+      {/* Content */}
+      <div className={reverse ? "lg:order-1" : "lg:order-2"}>
+        <p className="text-primary text-[11px] sm:text-xs tracking-[0.35em] uppercase font-semibold mb-4">
+          {eyebrow}
+        </p>
+        <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] mb-5 text-foreground">
+          {heading}
+        </h3>
+        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl">
+          {description}
+        </p>
+
+        <Checklist items={items} />
+
+        <div className="mt-10">
+          <Button
+            variant="gold-outline"
+            onClick={scrollToQuote}
+            className="rounded-full h-12 px-8 text-sm tracking-wide"
+          >
+            Learn More
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default function Offerings() {
-  const scrollToQuote = () => {
-    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section
       id="services"
-      className="relative w-full py-20 sm:py-24 lg:py-28 px-5 sm:px-8 lg:px-10 bg-background"
+      className="surface-white relative w-full py-24 sm:py-28 lg:py-36 px-5 sm:px-8 lg:px-10"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-20 sm:mb-24">
           <p className="text-primary text-[11px] sm:text-xs tracking-[0.35em] uppercase font-semibold mb-4">
             Our Services
           </p>
@@ -135,24 +137,27 @@ export default function Offerings() {
           </p>
         </div>
 
-        {/* Categories */}
-        <div className="space-y-16 sm:space-y-20">
-          <CategoryBlock emoji="🚗" title="Auto Services" services={autoServices} />
-          <CategoryBlock emoji="🏡" title="Home Services" services={homeServices} />
-        </div>
-
-        {/* CTA */}
-        <div className="mt-16 sm:mt-20 flex justify-center">
-          <Button
-            variant="gold"
-            className="w-full sm:w-auto rounded-full h-12 px-9 text-sm tracking-wide"
-            onClick={scrollToQuote}
-          >
-            REQUEST YOUR FREE QUOTE
-          </Button>
+        {/* Two large feature rows */}
+        <div className="space-y-24 lg:space-y-32">
+          <FeatureRow
+            eyebrow="Auto Care"
+            heading="Auto Detailing"
+            description="Professional care that restores your vehicle inside and out with attention to every detail."
+            items={autoItems}
+            image={autoImg}
+            imageAlt="Freshly detailed luxury vehicle with a mirror-like finish"
+          />
+          <FeatureRow
+            eyebrow="Home Care"
+            heading="Exterior Home Care"
+            description="Protect and refresh your home's exterior with professional cleaning and maintenance services."
+            items={homeItems}
+            image={homeImg}
+            imageAlt="Beautiful South Florida home with a pristine exterior"
+            reverse
+          />
         </div>
       </div>
     </section>
   );
 }
-
