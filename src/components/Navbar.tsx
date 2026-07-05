@@ -205,6 +205,7 @@ const Navbar = () => {
           <a
             href={PHONE_HREF}
             onClick={() => setMobileOpen(false)}
+            aria-label="Call SoSpreadShine at 954-204-6940"
             className="mt-4 flex items-center justify-center gap-2 rounded-full h-12 px-6 border-2 border-primary text-primary text-sm font-semibold tracking-wide"
           >
             <Phone size={16} /> Call (954) 204-6940
