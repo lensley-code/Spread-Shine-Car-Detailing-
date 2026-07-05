@@ -113,11 +113,16 @@ const Navbar = () => {
           <img
             src="/logo.png"
             alt="SoSpreadShine logo"
-            className="h-9 w-9 object-contain"
+            className="h-10 w-10 object-contain"
           />
-          <span className="font-heading text-[22px] font-semibold text-[hsl(0_0%_95%)]">
-            SoSpreadShine
-          </span>
+          <div className="leading-none">
+            <span className="block font-heading text-[20px] sm:text-[22px] font-semibold text-[hsl(0_0%_95%)]">
+              SoSpreadShine
+            </span>
+            <span className="block mt-0.5 text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-primary/80 font-medium">
+              Detailing & Home Care
+            </span>
+          </div>
         </Link>
 
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
@@ -144,36 +149,20 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-5">
-          <div className="flex items-center gap-4">
-            {SOCIAL_LINKS.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                style={{ color: "hsl(0 0% 85% / 0.85)" }}
-              >
-                <Icon className="w-[18px] h-[18px]" />
-              </a>
-            ))}
-          </div>
           <a
             href={PHONE_HREF}
-            className="hidden xl:inline-flex items-center gap-1.5 text-sm font-medium text-[hsl(40_20%_82%)] hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[hsl(40_20%_82%)] hover:text-primary transition-colors"
             aria-label="Call SoSpreadShine"
           >
-            <Phone size={15} /> (954) 204-6940
+            <Phone size={15} className="text-primary" /> (954) 204-6940
           </a>
           <Button
             variant="gold"
-            className="rounded-full px-7 h-11 text-sm font-semibold tracking-wide"
+            className="rounded-full px-6 h-11 text-sm font-semibold tracking-wide"
             onClick={handleQuoteClick}
           >
-            Get Quote
+            Get a Free Quote
           </Button>
-
         </div>
 
         <button
