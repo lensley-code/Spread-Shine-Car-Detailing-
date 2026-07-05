@@ -53,6 +53,8 @@ const Index = () => {
       <AnimatedSection>
         <Footer />
       </AnimatedSection>
+
+      <StickyMobileCTA />
     </div>
   );
 };
