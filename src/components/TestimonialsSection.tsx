@@ -3,21 +3,29 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah M.",
-    text: "Luz Astrology helped me understand my spiritual gifts in a way that felt deeply aligned with my faith. Truly transformative.",
+    name: "Customer Review",
+    text: "SoSpreadShine did an amazing job on my car. It looked clean, fresh, and professionally detailed.",
     rating: 5,
   },
   {
-    name: "David R.",
-    text: "I was skeptical at first, but the biblical foundation made all the difference. My reading was profound and encouraging.",
+    name: "Customer Review",
+    text: "Great communication, fair pricing, and quality work. I would definitely use them again.",
     rating: 5,
   },
   {
-    name: "Maria L.",
-    text: "The insights about my relationships were incredibly accurate. I feel more connected to God's plan for my life.",
+    name: "Customer Review",
+    text: "My driveway and outdoor area looked completely refreshed. Reliable and professional service.",
     rating: 5,
   },
 ];
+
+const scrollToQuote = () => {
+  const el = document.getElementById("quote");
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+};
 
 const TestimonialsSection = () => {
   return (
@@ -26,13 +34,13 @@ const TestimonialsSection = () => {
         <div className="text-center mb-14">
           <p className="text-primary text-sm tracking-[0.3em] uppercase mb-3">Testimonials</p>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-light">
-            Words from Seekers
+            What Customers Are Saying
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {testimonials.map((t) => (
-            <div key={t.name} className="bg-card/50 border border-border/30 rounded-lg p-6">
+          {testimonials.map((t, i) => (
+            <div key={i} className="bg-card/50 border border-border/30 rounded-lg p-6">
               <div className="flex gap-0.5 text-primary mb-4">
                 {Array.from({ length: t.rating }).map((_, i) => (
                   <Star key={i} size={14} fill="currentColor" />
@@ -45,8 +53,8 @@ const TestimonialsSection = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="gold" className="rounded-full px-8">
-            Book Your Reading →
+          <Button variant="gold" onClick={scrollToQuote} className="rounded-full px-8">
+            Request a Free Quote →
           </Button>
         </div>
       </div>

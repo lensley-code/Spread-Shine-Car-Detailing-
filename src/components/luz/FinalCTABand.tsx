@@ -19,14 +19,17 @@ const FinalCTABand = () => {
       }}
     >
       <div className="container mx-auto max-w-5xl text-center">
+        <p className="text-primary text-xs sm:text-sm tracking-[0.3em] uppercase mb-4">
+          Ready to Shine?
+        </p>
         <h2
           className="font-heading font-semibold text-foreground mb-3 tracking-tight"
           style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", lineHeight: 1.15 }}
         >
-          Ready to Bring Back the Shine?
+          Your vehicle and home deserve the best.
         </h2>
         <p className="text-base sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-          Professional auto detailing and exterior cleaning throughout South Florida.
+          Request a free quote today and let SoSpreadShine bring back the shine.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <button

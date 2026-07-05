@@ -1,29 +1,36 @@
-import { Sparkles, CalendarCheck, Video, Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ClipboardList, CalendarCheck, Sparkles, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const steps = [
   {
-    icon: Sparkles,
-    title: "Choose your reading",
-    description: "Select the session that fits the season you're walking through.",
+    icon: ClipboardList,
+    title: "Request Your Quote",
+    description: "Tell us what service you need for your vehicle or property.",
   },
   {
     icon: CalendarCheck,
-    title: "Share your birth details",
-    description: "Provide your date, time, and place of birth so we can prepare your chart.",
+    title: "Schedule Your Service",
+    description: "We'll confirm the details, location, and best time for your appointment.",
   },
   {
-    icon: Video,
-    title: "Meet live online",
-    description: "Join a one-on-one video session — conversational, prayerful, and unhurried.",
+    icon: Sparkles,
+    title: "We Get to Work",
+    description: "SoSpreadShine arrives ready to clean, detail, wash, or restore with care.",
   },
   {
-    icon: Star,
-    title: "Receive insight for your season",
-    description: "Walk away with clarity, scripture-rooted reflection, and next steps.",
+    icon: ThumbsUp,
+    title: "Enjoy the Shine",
+    description: "See the difference and enjoy a cleaner vehicle or refreshed property.",
   },
 ];
+
+const scrollToQuote = () => {
+  const el = document.getElementById("quote");
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+};
 
 const FeaturesSection = () => {
   return (
@@ -32,15 +39,14 @@ const FeaturesSection = () => {
         <div className="text-center mb-14 lg:mb-20">
           <p className="text-primary text-sm tracking-[0.3em] uppercase mb-3">How It Works</p>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-light">
-            Your Reading Journey
+            Your Shine Journey
           </h2>
           <p className="mt-5 text-muted-foreground text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
-            A simple guided experience from booking to insight.
+            A simple process from quote request to a spotless finish.
           </p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
-          {/* Connector line — desktop horizontal */}
           <div
             className="hidden lg:block absolute top-8 left-0 right-0 h-px pointer-events-none"
             style={{
@@ -53,7 +59,6 @@ const FeaturesSection = () => {
           <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 relative">
             {steps.map((step, i) => (
               <li key={step.title} className="relative flex flex-col items-center text-center px-2">
-                {/* Numbered circle / icon */}
                 <div className="relative z-10 w-16 h-16 rounded-full bg-background border border-primary/40 flex items-center justify-center shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.45)]">
                   <step.icon size={22} className="text-primary" strokeWidth={1.5} />
                   <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-semibold flex items-center justify-center shadow-md">
@@ -73,14 +78,13 @@ const FeaturesSection = () => {
         </div>
 
         <div className="flex justify-center mt-14 lg:mt-20">
-          <Link to="/book">
-            <Button
-              variant="gold"
-              className="rounded-full px-8 h-12 text-sm font-semibold tracking-[0.15em] uppercase"
-            >
-              Book Your Reading
-            </Button>
-          </Link>
+          <Button
+            variant="gold"
+            onClick={scrollToQuote}
+            className="rounded-full px-8 h-12 text-sm font-semibold tracking-[0.15em] uppercase"
+          >
+            Request Your Quote
+          </Button>
         </div>
       </div>
     </section>

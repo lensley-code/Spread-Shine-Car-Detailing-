@@ -84,7 +84,7 @@ export const LATEST_SOCIAL_POSTS: LatestSocialPost[] = [
 ]
 
 export const SOCIAL_PROFILES = {
-  x: 'https://x.com/prophluz111',
-  instagram: 'https://www.instagram.com/prophluz',
-  tiktok: 'https://www.tiktok.com/@prophluz',
+  x: '',
+  instagram: '',
+  tiktok: 'https://www.tiktok.com/@jhonnyjeanbaptist18',
 } as const

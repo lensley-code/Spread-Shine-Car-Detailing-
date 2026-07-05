@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Instagram, Twitter } from "lucide-react";
 import { SOCIAL_PROFILES } from "@/config/latestSocialPosts";
 
 const navLinks = [
-  { label: "Privacy", to: "/privacy" },
-  { label: "Terms", to: "/terms" },
-  { label: "FAQ", to: "/faq" },
+  { label: "Home", to: "/" },
+  { label: "Services", to: "/#services" },
+  { label: "Gallery", to: "/#gallery" },
+  { label: "About", to: "/#about" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -30,13 +30,11 @@ const Footer = () => {
     <footer
       className="relative pt-14 pb-8 isolate"
       style={{
-        // Locked dark celestial navy — do not let pages override
         background:
           "radial-gradient(1100px 420px at 50% 0%, rgba(200,168,78,0.06), transparent 65%), linear-gradient(180deg, #0B1024 0%, #070B1C 100%)",
         color: "rgba(232, 230, 240, 0.75)",
       }}
     >
-      {/* Subtle top divider glow */}
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-px"
@@ -52,33 +50,18 @@ const Footer = () => {
           <div>
             <div className="relative inline-flex items-center justify-center md:justify-start gap-2">
               <span className="text-primary text-xl">✦</span>
-              {/* Twinkle */}
-              <span
-                aria-hidden="true"
-                className="absolute -top-1 -left-2 text-[0.5rem] text-primary/70 animate-pulse"
-                style={{ animationDuration: "2.8s" }}
-              >
-                ✦
-              </span>
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-1 left-3 text-[0.4rem] text-primary/50 animate-pulse"
-                style={{ animationDuration: "3.6s", animationDelay: "1s" }}
-              >
-                ✦
-              </span>
               <span
                 className="font-heading text-lg font-semibold tracking-wide"
                 style={{ color: "rgba(245, 243, 235, 0.95)" }}
               >
-                Luz Astrology
+                SoSpreadShine
               </span>
             </div>
             <p
-              className="mt-3 text-sm font-light"
+              className="mt-3 text-sm font-light max-w-xs mx-auto md:mx-0"
               style={{ color: "rgba(232, 230, 240, 0.6)" }}
             >
-              Guidance, reflection, and spiritual insight.
+              Professional auto detailing and exterior cleaning services in South Florida.
             </p>
           </div>
 
@@ -99,49 +82,30 @@ const Footer = () => {
           {/* Social + CTA */}
           <div className="flex flex-col items-center md:items-end gap-4">
             <div className="flex items-center gap-5">
-              <a
-                href={SOCIAL_PROFILES.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                style={{ color: "rgba(232, 230, 240, 0.7)" }}
-              >
-                <Instagram className="w-[18px] h-[18px]" />
-              </a>
-              <a
-                href={SOCIAL_PROFILES.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                style={{ color: "rgba(232, 230, 240, 0.7)" }}
-              >
-                <TikTokIcon className="w-[18px] h-[18px]" />
-              </a>
-              <a
-                href={SOCIAL_PROFILES.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                style={{ color: "rgba(232, 230, 240, 0.7)" }}
-              >
-                <Twitter className="w-[18px] h-[18px]" />
-              </a>
+              {SOCIAL_PROFILES.tiktok && (
+                <a
+                  href={SOCIAL_PROFILES.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
+                  style={{ color: "rgba(232, 230, 240, 0.7)" }}
+                >
+                  <TikTokIcon className="w-[18px] h-[18px]" />
+                </a>
+              )}
             </div>
             <Link
-              to="/book"
+              to="/#quote"
               className="group inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-300 hover:[text-shadow:0_0_12px_hsl(var(--primary)/0.4)]"
               style={{ color: "hsl(var(--primary))" }}
             >
-              Book a Session
+              Request a Free Quote
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </div>
 
-        {/* Bottom microcopy */}
         <div
           className="mt-12 pt-6 text-center border-t"
           style={{ borderColor: "rgba(232, 230, 240, 0.08)" }}
@@ -150,7 +114,7 @@ const Footer = () => {
             className="text-[10.5px] tracking-[0.18em] uppercase font-light"
             style={{ color: "rgba(232, 230, 240, 0.4)" }}
           >
-            © 2026 Luz Astrology. All rights reserved.
+            © 2026 SoSpreadShine. All rights reserved.
           </p>
         </div>
       </div>
