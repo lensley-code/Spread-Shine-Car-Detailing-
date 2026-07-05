@@ -101,9 +101,13 @@ const Navbar = () => {
             }
           }}
         >
-          <span className="text-primary text-2xl">✦</span>
-          <span className="font-heading text-[22px] font-semibold text-[hsl(40_20%_92%)]">
-            Luz Astrology
+          <img
+            src="/logo.png"
+            alt="SoSpreadShine logo"
+            className="h-9 w-9 object-contain"
+          />
+          <span className="font-heading text-[22px] font-semibold text-[hsl(0_0%_95%)]">
+            SoSpreadShine
           </span>
         </Link>
 
