@@ -38,7 +38,7 @@ export default function Gallery() {
         </div>
 
         {/* Grid — 4 featured projects, larger cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 max-w-6xl mx-auto">
           {PROJECTS.map((p) => (
             <article
               key={p.id}

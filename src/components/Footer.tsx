@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { SOCIAL_PROFILES } from "@/config/latestSocialPosts";
 
-const navLinks = [
+const quickLinks = [
   { label: "Home", to: "/" },
   { label: "Services", to: "/#services" },
-  { label: "Our Work", to: "/#gallery" },
-  { label: "About", to: "/#about" },
+  { label: "Gallery", to: "/#gallery" },
+  { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -45,10 +46,10 @@ const Footer = () => {
       />
 
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 items-start text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 items-start">
           {/* Brand */}
           <div>
-            <div className="relative inline-flex items-center justify-center md:justify-start gap-2">
+            <div className="inline-flex items-center gap-2">
               <span className="text-primary text-xl">✦</span>
               <span
                 className="font-heading text-lg font-semibold tracking-wide"
@@ -58,51 +59,91 @@ const Footer = () => {
               </span>
             </div>
             <p
-              className="mt-3 text-sm font-light max-w-xs mx-auto md:mx-0"
+              className="mt-3 text-sm font-light max-w-xs"
               style={{ color: "rgba(232, 230, 240, 0.6)" }}
             >
               Professional auto detailing and exterior cleaning services in South Florida.
             </p>
           </div>
 
-          {/* Navigation */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.to}
-                className="relative transition-all duration-300 hover:text-primary hover:[text-shadow:0_0_12px_hsl(var(--primary)/0.4)] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-primary/70 after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"
-                style={{ color: "rgba(232, 230, 240, 0.72)" }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Social + CTA */}
-          <div className="flex flex-col items-center md:items-end gap-4">
-            <div className="flex items-center gap-5">
-              {SOCIAL_PROFILES.tiktok && (
-                <a
-                  href={SOCIAL_PROFILES.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="TikTok"
-                  className="transition-all duration-300 hover:text-primary hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.5))]"
-                  style={{ color: "rgba(232, 230, 240, 0.7)" }}
-                >
-                  <TikTokIcon className="w-[18px] h-[18px]" />
-                </a>
-              )}
-            </div>
-            <Link
-              to="/#quote"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-300 hover:[text-shadow:0_0_12px_hsl(var(--primary)/0.4)]"
-              style={{ color: "hsl(var(--primary))" }}
+          {/* Quick Links */}
+          <div>
+            <h4
+              className="font-heading text-sm font-semibold tracking-wide mb-4"
+              style={{ color: "rgba(245, 243, 235, 0.95)" }}
             >
-              Request a Free Quote
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
+              Quick Links
+            </h4>
+            <ul className="space-y-2 text-sm">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.to}
+                    className="transition-colors duration-300 hover:text-primary"
+                    style={{ color: "rgba(232, 230, 240, 0.72)" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Us */}
+          <div>
+            <h4
+              className="font-heading text-sm font-semibold tracking-wide mb-4"
+              style={{ color: "rgba(245, 243, 235, 0.95)" }}
+            >
+              Contact Us
+            </h4>
+            <ul className="space-y-2.5 text-sm" style={{ color: "rgba(232, 230, 240, 0.72)" }}>
+              <li>
+                <a
+                  href="tel:9542046940"
+                  className="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                >
+                  <Phone size={14} className="text-primary" /> (954) 204-6940
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:jhonnyjb@sospreadshine.com"
+                  className="inline-flex items-center gap-2 hover:text-primary transition-colors break-all"
+                >
+                  <Mail size={14} className="text-primary shrink-0" /> jhonnyjb@sospreadshine.com
+                </a>
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <MapPin size={14} className="text-primary" /> Serving South Florida
+              </li>
+            </ul>
+          </div>
+
+          {/* Follow Us */}
+          <div>
+            <h4
+              className="font-heading text-sm font-semibold tracking-wide mb-4"
+              style={{ color: "rgba(245, 243, 235, 0.95)" }}
+            >
+              Follow Us
+            </h4>
+            <ul className="space-y-2 text-sm">
+              {SOCIAL_PROFILES.tiktok && (
+                <li>
+                  <a
+                    href={SOCIAL_PROFILES.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 transition-colors duration-300 hover:text-primary"
+                    style={{ color: "rgba(232, 230, 240, 0.72)" }}
+                  >
+                    <TikTokIcon className="w-4 h-4 text-primary" />
+                    TikTok — @jhonnyjeanbaptist18
+                  </a>
+                </li>
+              )}
+            </ul>
           </div>
         </div>
 
