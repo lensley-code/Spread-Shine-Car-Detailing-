@@ -38,7 +38,7 @@ const Index = () => {
         <AboutSection />
       </AnimatedSection>
       {/* Mirrored organic curve — soft gray → white */}
-      <SectionDivider from={SOFT_GRAY} to={WHITE} variant="curve" direction="up" height={80} />
+      <SectionDivider from={SOFT_GRAY} to={WHITE} variant="curve" direction="down" height={80} />
 
       {/* 4. Request Your Free Quote (white) */}
       <QuoteSection />
