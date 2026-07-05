@@ -32,10 +32,11 @@ const Footer = () => {
       className="relative pt-14 pb-8 isolate"
       style={{
         background:
-          "radial-gradient(1100px 420px at 50% 0%, rgba(200,168,78,0.06), transparent 65%), linear-gradient(180deg, #0B1024 0%, #070B1C 100%)",
-        color: "rgba(232, 230, 240, 0.75)",
+          "radial-gradient(1100px 420px at 50% 0%, rgba(201,162,39,0.05), transparent 65%), #0D0D0D",
+        color: "rgba(232, 230, 230, 0.75)",
       }}
     >
+
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-px"

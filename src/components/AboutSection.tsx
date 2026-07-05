@@ -33,15 +33,6 @@ const scrollToQuote = () => {
 
 const AboutSection = () => (
   <section id="learn-more" className="surface-white relative">
-    {/* Top transition: warm cream fading into white */}
-    <div
-      aria-hidden="true"
-      className="h-16 md:h-24 w-full"
-      style={{
-        background: "linear-gradient(to bottom, hsl(39 43% 97%), hsl(0 0% 100%))",
-      }}
-    />
-
     <div className="py-14 sm:py-20 lg:py-28">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-5">
@@ -87,16 +78,8 @@ const AboutSection = () => (
         </div>
       </div>
     </div>
-
-    {/* Bottom transition: white fading into warm cream */}
-    <div
-      aria-hidden="true"
-      className="h-16 md:h-24 w-full"
-      style={{
-        background: "linear-gradient(to bottom, hsl(0 0% 100%), hsl(39 43% 97%))",
-      }}
-    />
   </section>
 );
 
 export default AboutSection;
+
