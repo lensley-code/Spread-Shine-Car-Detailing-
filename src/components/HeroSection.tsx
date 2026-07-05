@@ -83,7 +83,7 @@ const HeroSection = () => {
           asChild
           className="w-full rounded-full h-12 px-7 text-sm inline-flex items-center justify-center gap-2.5 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-background/40 backdrop-blur-sm mb-4"
         >
-          <a href="tel:+19542046940">
+          <a href="tel:9542046940" aria-label="Call SoSpreadShine at 954-204-6940">
             <Phone size={18} strokeWidth={2.25} />
             CALL (954) 204-6940
           </a>
@@ -136,7 +136,7 @@ const HeroSection = () => {
                 asChild
                 className="rounded-full h-12 px-8 text-sm inline-flex items-center justify-center gap-2.5 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-background/30 backdrop-blur-sm"
               >
-                <a href="tel:+19542046940">
+                <a href="tel:9542046940" aria-label="Call SoSpreadShine at 954-204-6940">
                   <Phone size={20} strokeWidth={2.25} />
                   CALL (954) 204-6940
                 </a>

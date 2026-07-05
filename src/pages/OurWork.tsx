@@ -166,7 +166,7 @@ const OurWork = () => {
               variant="gold-outline"
               className="w-full sm:w-auto rounded-full h-12 px-8 text-sm font-semibold tracking-wide"
             >
-              <a href="tel:9542046940" className="inline-flex items-center gap-2">
+              <a href="tel:9542046940" aria-label="Call SoSpreadShine at 954-204-6940" className="inline-flex items-center gap-2">
                 <Phone size={16} /> Call (954) 204-6940
               </a>
             </Button>

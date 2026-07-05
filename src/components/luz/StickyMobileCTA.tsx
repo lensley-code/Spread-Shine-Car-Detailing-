@@ -39,6 +39,7 @@ const StickyMobileCTA = () => {
       <div className="mx-3 mb-3 rounded-2xl border border-primary/25 bg-[hsl(0_0%_7%/0.96)] backdrop-blur shadow-[0_10px_40px_-10px_rgba(0,0,0,0.7)] p-2 flex items-center gap-2">
         <a
           href={PHONE_HREF}
+          aria-label="Call SoSpreadShine at 954-204-6940"
           className="flex-1 inline-flex items-center justify-center gap-2 h-12 rounded-xl border border-primary/50 text-primary font-semibold text-sm active:scale-[0.98] transition-transform"
         >
           <Phone size={16} /> Call

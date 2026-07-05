@@ -133,6 +133,7 @@ const QuoteSection = () => {
                 {/* Phone callout */}
                 <a
                   href={PHONE_HREF}
+                  aria-label="Call SoSpreadShine at 954-204-6940"
                   className="flex items-center gap-4 rounded-2xl border border-primary/30 bg-primary/5 px-4 py-3.5 mb-6 hover:bg-primary/10 transition-colors"
                 >
                   <span className="inline-flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-primary/15">
