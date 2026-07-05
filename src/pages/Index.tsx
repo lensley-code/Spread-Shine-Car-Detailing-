@@ -27,7 +27,7 @@ const Index = () => {
       <Navbar />
       {/* 1. Hero — Who are you? What do you do? */}
       <HeroSection />
-      <SectionDivider from={DARK} to={SOFT_WHITE} />
+      <SectionDivider from={DARK} to={SOFT_WHITE} className="-mt-px relative z-0" />
 
       {/* 2. Services — Can you solve my problem? */}
       <Offerings />
