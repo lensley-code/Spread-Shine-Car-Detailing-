@@ -23,7 +23,7 @@ export default function Gallery() {
     document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section id="gallery" className="surface-beige py-24 md:py-32">
+    <section id="gallery" className="surface-beige py-16 sm:py-24 md:py-28">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20">
           <p className="text-primary text-xs sm:text-sm tracking-[0.3em] uppercase mb-4 font-medium">
