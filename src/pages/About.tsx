@@ -77,7 +77,7 @@ const About = () => {
                   style={{ boxShadow: "0 30px 60px -20px rgba(0,0,0,0.25)" }}
                 >
                   <img
-                    src={johnnyPortrait.url}
+                    src={johnnyPortrait}
                     alt="Johnny Jean-Baptist — Owner of SoSpreadShine"
                     className="w-full h-auto object-cover aspect-[4/5]"
                     loading="eager"
