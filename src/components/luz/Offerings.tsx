@@ -107,7 +107,9 @@ function CategoryBlock({
 }
 
 export default function Offerings() {
-  const navigate = useNavigate();
+  const scrollToQuote = () => {
+    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section
@@ -143,8 +145,8 @@ export default function Offerings() {
         <div className="mt-16 sm:mt-20 flex justify-center">
           <Button
             variant="gold"
-            className="rounded-full h-12 px-9 text-sm tracking-wide"
-            onClick={() => navigate("/contact")}
+            className="w-full sm:w-auto rounded-full h-12 px-9 text-sm tracking-wide"
+            onClick={scrollToQuote}
           >
             REQUEST YOUR FREE QUOTE
           </Button>
@@ -153,3 +155,4 @@ export default function Offerings() {
     </section>
   );
 }
+
