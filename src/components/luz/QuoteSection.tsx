@@ -94,9 +94,9 @@ const QuoteSection = () => {
   };
 
   const inputBase =
-    "w-full rounded-xl px-4 py-3.5 min-h-[48px] font-body text-base sm:text-sm outline-none transition-all duration-300 bg-background border border-border text-foreground focus:border-primary focus:ring-2 focus:ring-primary/30";
+    "w-full rounded-xl px-4 py-3.5 min-h-[52px] font-body text-base sm:text-sm outline-none transition-all duration-200 bg-white border border-[#E7E7E7] text-[#1F2937] placeholder:text-[#9CA3AF] focus:border-primary focus:ring-2 focus:ring-primary/25";
   const labelBase =
-    "block text-xs uppercase tracking-[0.15em] mb-2 font-semibold text-muted-foreground";
+    "block text-sm mb-2 font-medium text-[#374151]";
 
 
   return (
