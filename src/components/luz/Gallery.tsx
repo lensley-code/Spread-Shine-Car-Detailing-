@@ -44,8 +44,10 @@ const FILTERS: { key: "all" | Category; label: string }[] = [
 ];
 
 export default function Gallery() {
-  const navigate = useNavigate();
   const [active, setActive] = useState<"all" | Category>("all");
+  const scrollToQuote = () =>
+    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
+
 
   const items = useMemo(
     () => (active === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === active)),
