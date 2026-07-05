@@ -30,15 +30,15 @@ const Index = () => {
 
       {/* 2. Services (white) */}
       <Offerings />
-      {/* Subtle white → soft-gray fade */}
-      <SectionDivider from={WHITE} to={SOFT_GRAY} height={48} />
+      {/* Elegant organic curve — white → soft gray */}
+      <SectionDivider from={WHITE} to={SOFT_GRAY} variant="curve" direction="up" height={80} />
 
-      {/* 3. Why Choose SoSpreadShine (white, sits on soft-gray) */}
+      {/* 3. Why Choose SoSpreadShine (sits on soft-gray) */}
       <AnimatedSection>
         <AboutSection />
       </AnimatedSection>
-      {/* Soft-gray → white fade */}
-      <SectionDivider from={SOFT_GRAY} to={WHITE} height={48} />
+      {/* Mirrored organic curve — soft gray → white */}
+      <SectionDivider from={SOFT_GRAY} to={WHITE} variant="curve" direction="up" height={80} />
 
       {/* 4. Request Your Free Quote (white) */}
       <QuoteSection />
