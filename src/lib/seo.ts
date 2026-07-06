@@ -1,10 +1,10 @@
-const SITE_URL = "https://luz-astrology.lovable.app";
+const SITE_URL = "https://sospreadshine.lovable.app";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 const DEFAULTS = {
-  title: "Luz Astrology | Faith & Alignment Through the Stars",
+  title: "SoSpreadShine | Premium Auto Detailing & Shine Services",
   description:
-    "A spiritually grounded approach to astrology, helping seekers explore clarity, meaning, and purpose through their unique design.",
+    "SoSpreadShine — professional auto detailing and finishing services. We know your expectations, let us spread the shine.",
   image: DEFAULT_OG_IMAGE,
   type: "website",
 };
@@ -55,7 +55,7 @@ export function setPageSeo(opts: SeoOptions = {}) {
   upsertMeta('meta[property="og:image"]', "property", "og:image", image);
   upsertMeta('meta[property="og:url"]', "property", "og:url", url);
   upsertMeta('meta[property="og:type"]', "property", "og:type", type);
-  upsertMeta('meta[property="og:site_name"]', "property", "og:site_name", "Luz Astrology");
+  upsertMeta('meta[property="og:site_name"]', "property", "og:site_name", "SoSpreadShine");
 
   upsertMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
   upsertMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
