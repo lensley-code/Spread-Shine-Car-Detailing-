@@ -1,10 +1,10 @@
-const SITE_URL = "https://luz-astrology.lovable.app";
+const SITE_URL = "https://sospreadshine.lovable.app";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 const DEFAULTS = {
-  title: "Luz Astrology | Faith & Alignment Through the Stars",
+  title: "SoSpreadShine | Premium Auto Detailing & Shine Services",
   description:
-    "A spiritually grounded approach to astrology, helping seekers explore clarity, meaning, and purpose through their unique design.",
+    "SoSpreadShine — professional auto detailing and finishing services. We know your expectations, let us spread the shine.",
   image: DEFAULT_OG_IMAGE,
   type: "website",
 };
