@@ -52,25 +52,20 @@ const QuoteSection = () => {
     }
     setSubmitting(true);
     try {
-      const composedMessage = [
-        `Service Needed: ${form.service}`,
-        `Phone: ${form.phone}`,
-        form.address ? `Property Address: ${form.address}` : null,
-        "",
-        form.message || "(No additional message provided)",
-      ].filter(Boolean).join("\n");
       const payload = {
-        name: form.name.trim(),
-        email: (form.email.trim() || `noreply+${Date.now()}@sospreadshine.local`).toLowerCase(),
-        topic: form.service,
-        message: composedMessage,
+        full_name: form.name.trim(),
+        phone: form.phone.trim(),
+        email: form.email.trim() ? form.email.trim().toLowerCase() : undefined,
+        service_needed: form.service,
+        property_address: form.address.trim() || undefined,
+        project_details: (form.message.trim() || "(No additional details provided)"),
       };
-      const { error } = await supabase.functions.invoke("submit-contact", { body: payload });
+      const { error } = await supabase.functions.invoke("submit-quote-request", { body: payload });
       if (error) throw error;
       setSubmitted(true);
     } catch (err) {
       console.error("[quote] submit failed", err);
-      toast.error("Could not send your request. Please call (954) 204-6940 directly.");
+      toast.error("Something went wrong. Please try again or call (954) 204-6940.");
     } finally {
       setSubmitting(false);
     }
