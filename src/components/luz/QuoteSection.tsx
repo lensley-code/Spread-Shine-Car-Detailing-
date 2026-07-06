@@ -52,25 +52,20 @@ const QuoteSection = () => {
     }
     setSubmitting(true);
     try {
-      const composedMessage = [
-        `Service Needed: ${form.service}`,
-        `Phone: ${form.phone}`,
-        form.address ? `Property Address: ${form.address}` : null,
-        "",
-        form.message || "(No additional message provided)",
-      ].filter(Boolean).join("\n");
       const payload = {
-        name: form.name.trim(),
-        email: (form.email.trim() || `noreply+${Date.now()}@sospreadshine.local`).toLowerCase(),
-        topic: form.service,
-        message: composedMessage,
+        full_name: form.name.trim(),
+        phone: form.phone.trim(),
+        email: form.email.trim() ? form.email.trim().toLowerCase() : undefined,
+        service_needed: form.service,
+        property_address: form.address.trim() || undefined,
+        project_details: (form.message.trim() || "(No additional details provided)"),
       };
-      const { error } = await supabase.functions.invoke("submit-contact", { body: payload });
+      const { error } = await supabase.functions.invoke("submit-quote-request", { body: payload });
       if (error) throw error;
       setSubmitted(true);
     } catch (err) {
       console.error("[quote] submit failed", err);
-      toast.error("Could not send your request. Please call (954) 204-6940 directly.");
+      toast.error("Something went wrong. Please try again or call (954) 204-6940.");
     } finally {
       setSubmitting(false);
     }
@@ -176,9 +171,9 @@ const QuoteSection = () => {
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 mb-5">
                   <Check className="text-primary" size={26} />
                 </div>
-                <h3 className="font-heading text-2xl font-semibold mb-3">Quote request received</h3>
+                <h3 className="font-heading text-2xl font-semibold mb-3">Thank you!</h3>
                 <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                  Thanks for reaching out. We'll be in touch shortly with your free, no-obligation quote.
+                  Your quote request has been received. SoSpreadShine will contact you soon.
                 </p>
               </motion.div>
             )}
