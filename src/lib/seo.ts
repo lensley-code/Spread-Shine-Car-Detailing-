@@ -55,7 +55,7 @@ export function setPageSeo(opts: SeoOptions = {}) {
   upsertMeta('meta[property="og:image"]', "property", "og:image", image);
   upsertMeta('meta[property="og:url"]', "property", "og:url", url);
   upsertMeta('meta[property="og:type"]', "property", "og:type", type);
-  upsertMeta('meta[property="og:site_name"]', "property", "og:site_name", "Luz Astrology");
+  upsertMeta('meta[property="og:site_name"]', "property", "og:site_name", "SoSpreadShine");
 
   upsertMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
   upsertMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
