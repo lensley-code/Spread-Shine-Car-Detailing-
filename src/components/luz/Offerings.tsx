@@ -167,7 +167,8 @@ export default function Offerings() {
           />
           <ServiceCard
             image={homeImg}
-            imageAlt="Beautiful South Florida home with a clean exterior"
+            imageAlt="Freshly pressure-washed paver driveway and clean South Florida home exterior"
+            imagePosition="center 40%"
             title="Exterior Home Care"
             description="Professional cleaning and maintenance for your home."
             items={homeItems}
