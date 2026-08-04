@@ -42,12 +42,14 @@ const scrollToQuote = () =>
 function ServiceCard({
   image,
   imageAlt,
+  imagePosition = "center",
   title,
   description,
   items,
 }: {
   image: string;
   imageAlt: string;
+  imagePosition?: string;
   title: string;
   description: string;
   items: string[];
@@ -63,8 +65,9 @@ function ServiceCard({
           src={image}
           alt={imageAlt}
           loading="lazy"
-          width={1200}
-          height={900}
+          width={1352}
+          height={1014}
+          style={{ objectPosition: imagePosition }}
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
