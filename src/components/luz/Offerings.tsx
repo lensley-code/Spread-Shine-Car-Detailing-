@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Check, Car, Home as HomeIcon, Sparkles, MapPin, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import autoImgAsset from "@/assets/services/auto-detailing.jpg.asset.json";
-import homeImgAsset from "@/assets/services/exterior-home.jpg.asset.json";
+import homeImgAsset from "@/assets/services/exterior-home-care.webp.asset.json";
 
 const autoImg = autoImgAsset.url;
 const homeImg = homeImgAsset.url;
@@ -42,12 +42,14 @@ const scrollToQuote = () =>
 function ServiceCard({
   image,
   imageAlt,
+  imagePosition = "center",
   title,
   description,
   items,
 }: {
   image: string;
   imageAlt: string;
+  imagePosition?: string;
   title: string;
   description: string;
   items: string[];
@@ -63,8 +65,9 @@ function ServiceCard({
           src={image}
           alt={imageAlt}
           loading="lazy"
-          width={1200}
-          height={900}
+          width={1352}
+          height={1014}
+          style={{ objectPosition: imagePosition }}
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
@@ -167,7 +170,8 @@ export default function Offerings() {
           />
           <ServiceCard
             image={homeImg}
-            imageAlt="Beautiful South Florida home with a clean exterior"
+            imageAlt="Freshly pressure-washed paver driveway and clean South Florida home exterior"
+            imagePosition="center 40%"
             title="Exterior Home Care"
             description="Professional cleaning and maintenance for your home."
             items={homeItems}
