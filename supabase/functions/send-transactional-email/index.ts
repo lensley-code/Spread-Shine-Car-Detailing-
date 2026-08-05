@@ -38,15 +38,35 @@ function generateToken(): string {
     .join('')
 }
 
-// Auth note: this function uses verify_jwt = true in config.toml, so Supabase's
-// gateway validates the caller's JWT (anon or service_role) before the request
-// reaches this code. No in-function auth check is needed.
+// Auth: this function is INTERNAL ONLY. It must never be callable from the
+// browser with the public anon/publishable key, otherwise anyone could send
+// arbitrary emails to arbitrary recipients from our verified domain.
+// Only callers presenting the service role key (i.e. other edge functions /
+// trusted server-side code) are allowed through.
+function isTrustedCaller(req: Request): boolean {
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+  if (!serviceKey) return false
+  const auth = req.headers.get('Authorization') ?? ''
+  const token = auth.replace(/^Bearer\s+/i, '').trim()
+  const apikey = (req.headers.get('apikey') ?? '').trim()
+  return token === serviceKey || apikey === serviceKey
+}
 
 Deno.serve(async (req) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
+
+  if (!isTrustedCaller(req)) {
+    console.warn('[send-transactional-email] rejected untrusted caller')
+    return new Response(JSON.stringify({ error: 'Forbidden' }), {
+      status: 403,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
+
+
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL')
   const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
