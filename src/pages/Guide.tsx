@@ -185,24 +185,15 @@ function LeadForm() {
       const cleanEmail = email.trim().toLowerCase();
       const cleanName = firstName.trim();
 
-      const { error: insertError } = await supabase.from("leads").insert({
-        email: cleanEmail,
-        name: cleanName || null,
-        source: "guide",
-      });
-      if (insertError && !insertError.message.toLowerCase().includes("duplicate")) {
-        console.warn("Lead insert warning:", insertError.message);
-      }
-
-      const idempotencyKey = `guide-delivery-${cleanEmail}-${Date.now()}`;
-      await supabase.functions.invoke("send-transactional-email", {
+      const { error: submitError } = await supabase.functions.invoke("submit-guide-lead", {
         body: {
-          templateName: "guide-delivery",
-          recipientEmail: cleanEmail,
-          idempotencyKey,
-          templateData: cleanName ? { name: cleanName } : {},
+          email: cleanEmail,
+          name: cleanName || undefined,
+          website,
         },
       });
+      if (submitError) throw submitError;
+
 
       navigate(
         `/guide-confirmation?email=${encodeURIComponent(cleanEmail)}${
