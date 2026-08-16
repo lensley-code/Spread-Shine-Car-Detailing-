@@ -159,7 +159,7 @@ const OurWork = () => {
               variant="gold"
               className="w-full sm:w-auto rounded-full h-12 px-8 text-sm font-semibold tracking-wide"
             >
-              <Link to="/#quote">Get a Free Quote</Link>
+              <Link to="/contact">Get a Free Quote</Link>
             </Button>
             <Button
               asChild
