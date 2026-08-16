@@ -96,10 +96,6 @@ const About = () => {
               <h1 className="font-heading font-semibold leading-[1.1] mb-6 text-foreground text-4xl sm:text-5xl lg:text-[3.25rem]">
                 Meet Johnny Jean-Baptist
               </h1>
-              <p className="max-w-[62ch] text-lg sm:text-xl text-foreground/80 leading-[1.7]">
-                For more than 20 years, Johnny Jean-Baptist has been helping people
-                care for one of their biggest investments — their vehicles and homes.
-              </p>
 
               <div className="mt-8 lg:mt-9 space-y-5 max-w-[68ch] text-base lg:text-[1.0625rem] text-muted-foreground leading-[1.7]">
                 <p>
