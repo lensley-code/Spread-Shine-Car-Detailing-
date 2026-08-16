@@ -134,7 +134,64 @@ function ServiceCard({
   );
 }
 
+function MobileServiceCarousel() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const onScroll = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const idx = Math.round(el.scrollLeft / (el.scrollWidth / 2));
+    setActive(Math.min(1, Math.max(0, idx)));
+  };
+
+  return (
+    <div className="sm:hidden">
+      <div
+        ref={scrollerRef}
+        onScroll={onScroll}
+        className="no-scrollbar -mx-4 flex gap-4 overflow-x-auto px-5 pb-2 snap-x snap-mandatory [scroll-behavior:smooth] [-webkit-overflow-scrolling:touch] [overscroll-behavior-x:contain]"
+      >
+        <div className="snap-start shrink-0 w-[88vw] max-w-[420px]">
+          <ServiceCard
+            image={autoImg}
+            imageAlt="Freshly detailed vehicle exterior"
+            title="Auto Detailing"
+            description="Complete care for your vehicle inside and out."
+            items={autoItems}
+          />
+        </div>
+        <div className="snap-start shrink-0 w-[88vw] max-w-[420px]">
+          <ServiceCard
+            image={homeImg}
+            imageAlt="Freshly pressure-washed paver driveway and clean South Florida home exterior"
+            imagePosition="center 40%"
+            title="Exterior Home Care"
+            description="Professional cleaning and maintenance for your home."
+            items={homeItems}
+          />
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-center gap-2" aria-hidden="true">
+        {[0, 1].map((i) => (
+          <span
+            key={i}
+            className={`h-1.5 rounded-full transition-all duration-200 ${
+              active === i ? "w-5 bg-primary" : "w-1.5 bg-muted-foreground/30"
+            }`}
+          />
+        ))}
+      </div>
+      <p className="mt-2 text-center text-xs text-muted-foreground/70">
+        Swipe to explore services →
+      </p>
+    </div>
+  );
+}
+
 export default function Offerings() {
+
   return (
     <section
       id="services"
