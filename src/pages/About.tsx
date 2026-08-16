@@ -93,9 +93,6 @@ const About = () => {
               <p className="text-primary text-xs sm:text-sm tracking-[0.3em] uppercase font-semibold mb-4">
                 About the Owner
               </p>
-              <h1 className="font-heading font-semibold leading-[1.1] mb-6 text-foreground text-4xl sm:text-5xl lg:text-[3.25rem]">
-                Meet Johnny Jean-Baptist
-              </h1>
 
               <div className="mt-8 lg:mt-9 space-y-5 max-w-[68ch] text-base lg:text-[1.0625rem] text-muted-foreground leading-[1.7]">
                 <p>
