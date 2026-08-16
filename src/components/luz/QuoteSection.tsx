@@ -30,7 +30,7 @@ const quoteSchema = z.object({
   email: z.string().trim().email("Invalid email").max(255).optional().or(z.literal("")),
   service: z.string().min(1, "Select a service"),
   address: z.string().trim().max(200).optional(),
-  message: z.string().trim().max(2000).optional(),
+  message: z.string().trim().min(1, "Please tell us about your project").max(2000),
 });
 
 
