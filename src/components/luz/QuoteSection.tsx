@@ -22,6 +22,7 @@ const serviceOptions = [
 
 const PHONE = "(954) 204-6940";
 const PHONE_HREF = "tel:9542046940";
+const WHATSAPP_HREF = "https://wa.me/19542046940";
 
 const quoteSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
