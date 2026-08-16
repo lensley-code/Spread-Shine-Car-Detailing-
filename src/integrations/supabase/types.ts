@@ -234,6 +234,7 @@ export type Database = {
           project_details: string
           property_address: string | null
           service_needed: string
+          source: string
           status: string
         }
         Insert: {
@@ -245,6 +246,7 @@ export type Database = {
           project_details: string
           property_address?: string | null
           service_needed: string
+          source?: string
           status?: string
         }
         Update: {
@@ -256,6 +258,7 @@ export type Database = {
           project_details?: string
           property_address?: string | null
           service_needed?: string
+          source?: string
           status?: string
         }
         Relationships: []
