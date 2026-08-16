@@ -87,7 +87,7 @@ const AdminContact = () => {
           <form onSubmit={sendMagicLink} className="space-y-4">
             <input
               type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@luz-astrology.com"
+              placeholder="you@example.com"
               className="w-full rounded-xl px-4 py-3 text-sm outline-none"
               style={{ background: "var(--color-white)", border: "1.5px solid var(--color-border)" }}
             />

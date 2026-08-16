@@ -40,7 +40,7 @@ const ContactNotificationEmail = ({ name, email, topic, message, submittedAt }: 
 
 export const template: TemplateEntry = {
   component: ContactNotificationEmail,
-  to: 'contact@luz-astrology.com',
+  to: 'lensley.stfelix@gmail.com',
   subject: (data) => `New contact: ${data.topic || 'message'} — ${data.name || 'visitor'}`,
   displayName: 'Contact form notification (admin)',
   previewData: {

@@ -9,12 +9,10 @@ export interface TemplateEntry {
   previewData?: Record<string, any>
 }
 
-import { template as guideDelivery } from './guide-delivery.tsx'
 import { template as contactNotification } from './contact-notification.tsx'
 import { template as quoteRequestNotification } from './quote-request-notification.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
-  'guide-delivery': guideDelivery,
   'contact-notification': contactNotification,
   'quote-request-notification': quoteRequestNotification,
 }
