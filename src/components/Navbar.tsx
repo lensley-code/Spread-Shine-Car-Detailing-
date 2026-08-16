@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Instagram, Twitter, Phone } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { SOCIAL_PROFILES } from "@/config/latestSocialPosts";
 
 // TikTok icon (Lucide doesn't ship one — minimal inline SVG matching Lucide style)
@@ -21,10 +21,8 @@ const TikTokIcon = ({ className = "" }: { className?: string }) => (
 );
 
 const SOCIAL_LINKS = [
-  { href: SOCIAL_PROFILES.instagram, label: "Instagram", Icon: Instagram },
   { href: SOCIAL_PROFILES.tiktok, label: "TikTok", Icon: TikTokIcon },
-  { href: SOCIAL_PROFILES.x, label: "X (Twitter)", Icon: Twitter },
-].filter((s) => !!s.href) as ReadonlyArray<{ href: string; label: string; Icon: typeof Instagram }>;
+].filter((s) => !!s.href) as ReadonlyArray<{ href: string; label: string; Icon: typeof TikTokIcon }>;
 
 const PHONE_HREF = "tel:9542046940";
 
