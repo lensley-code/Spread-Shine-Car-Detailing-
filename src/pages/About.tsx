@@ -190,7 +190,7 @@ const About = () => {
             <Button
               variant="gold"
               onClick={() => {
-                window.location.href = "/#quote";
+                window.location.href = "/contact";
               }}
               className="rounded-full h-12 px-9 text-sm font-semibold tracking-[0.1em] uppercase"
             >
