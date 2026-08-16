@@ -65,8 +65,8 @@ const StickyMobileCTA = () => {
     };
   }, [open]);
 
-  const itemBase =
-    "inline-flex items-center gap-2 h-10 pl-3 pr-4 rounded-full text-sm font-semibold shadow-[0_6px_18px_-6px_rgba(0,0,0,0.35)] active:scale-[0.97] transition-transform";
+  const actionBase =
+    "inline-flex items-center gap-2.5 h-[50px] w-[155px] pl-4 pr-4 rounded-full text-[15px] font-semibold shadow-[0_6px_18px_-6px_rgba(0,0,0,0.35)] active:scale-[0.97] transition-transform";
 
   return (
     <div
@@ -79,9 +79,9 @@ const StickyMobileCTA = () => {
         bottom: "calc(20px + env(safe-area-inset-bottom))",
       }}
     >
-      <div className="flex flex-col items-end gap-2">
+      <div className="flex flex-col items-end gap-3">
         <div
-          className={`flex flex-col items-end gap-2 transition-all duration-200 ${
+          className={`flex flex-col items-end gap-3 transition-all duration-200 ${
             open
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-2 pointer-events-none"
@@ -95,9 +95,11 @@ const StickyMobileCTA = () => {
               setOpen(false);
               goToQuote();
             }}
-            className={`${itemBase} bg-primary text-primary-foreground`}
+            aria-label="Get a free quote"
+            className={`${actionBase} bg-primary text-primary-foreground justify-between`}
           >
-            Get Quote <ArrowRight size={15} />
+            <span>Get Quote</span>
+            <ArrowRight size={18} strokeWidth={2.5} />
           </button>
 
           <a
@@ -107,19 +109,21 @@ const StickyMobileCTA = () => {
             tabIndex={open ? 0 : -1}
             aria-label="Chat with SoSpreadShine on WhatsApp"
             onClick={() => setOpen(false)}
-            className={`${itemBase} bg-white text-foreground border border-black/10`}
+            className={`${actionBase} bg-white text-[#232323] border border-black/10 justify-start`}
           >
-            <WhatsAppIcon size={16} className="text-[#25D366]" /> WhatsApp
+            <WhatsAppIcon size={19} className="text-[#25D366] shrink-0" />
+            <span>WhatsApp</span>
           </a>
 
           <a
             href={PHONE_HREF}
             tabIndex={open ? 0 : -1}
-            aria-label="Call SoSpreadShine at 954-204-6940"
+            aria-label="Call SoSpreadShine"
             onClick={() => setOpen(false)}
-            className={`${itemBase} bg-white text-foreground border border-black/10`}
+            className={`${actionBase} bg-white text-[#232323] border border-black/10 justify-start`}
           >
-            <Phone size={15} /> Call
+            <Phone size={19} strokeWidth={2.5} className="text-[#C9A227] shrink-0" />
+            <span>Call Now</span>
           </a>
         </div>
 
