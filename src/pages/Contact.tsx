@@ -315,6 +315,7 @@ const Contact = () => {
                 >
                   {PHONE}
                 </a>
+              <div className="flex flex-col gap-3">
                 <a
                   href={PHONE_HREF}
                   aria-label="Call SoSpreadShine at 954-204-6940"
@@ -322,6 +323,16 @@ const Contact = () => {
                 >
                   <Phone size={15} /> Call Now
                 </a>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with SoSpreadShine on WhatsApp"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold uppercase tracking-[0.1em] bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <WhatsAppIcon size={16} /> Chat on WhatsApp
+                </a>
+              </div>
                 <p className="text-xs text-muted-foreground mt-4 italic">
                   Usually responds within one business day.
                 </p>
