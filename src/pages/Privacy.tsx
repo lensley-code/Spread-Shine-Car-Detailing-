@@ -79,7 +79,7 @@ const sections: PrivacySection[] = [
     number: 9,
     heading: "Contact Us",
     paragraphs: [
-      "If you have any questions about this Privacy Policy or how your information is used, please reach out at support@luz-astrology.com. We are happy to clarify anything and to make sure you feel completely at ease.",
+      "If you have any questions about this Privacy Policy or how your information is used, please reach out at lensley.stfelix@gmail.com. We are happy to clarify anything and to make sure you feel completely at ease.",
     ],
   },
 ];

@@ -101,7 +101,7 @@ function buildICS({
     'VERSION:2.0',
     'PRODID:-//Luz Astrology//Booking//EN',
     'BEGIN:VEVENT',
-    `UID:${Date.now()}@luzastrology`,
+    `UID:${Date.now()}@sospreadshine`,
     `DTSTAMP:${fmt(new Date().toISOString())}`,
     `DTSTART:${fmt(start)}`,
     `DTEND:${fmt(end)}`,
@@ -154,7 +154,7 @@ export default function BookingConfirmed() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'luz-astrology-session.ics'
+    a.download = 'sospreadshine-appointment.ics'
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -457,7 +457,7 @@ export default function BookingConfirmed() {
             )}
 
             <a
-              href="https://www.tiktok.com/@luzastrology"
+              href="https://www.tiktok.com/@sospreadshine"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold tracking-wide transition-colors"

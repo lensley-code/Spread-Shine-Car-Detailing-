@@ -5,15 +5,15 @@ import { TEMPLATES } from '../_shared/transactional-email-templates/registry.ts'
 
 // Configuration baked in at scaffold time — do NOT change these manually.
 // To update, re-run the email domain setup flow.
-const SITE_NAME = "luz-astrology"
+const SITE_NAME = "sospreadshine"
 // SENDER_DOMAIN is the verified sender subdomain FQDN (e.g., "notify.example.com").
 // It MUST match the subdomain delegated to Lovable's nameservers — never the root domain.
 // The email API looks up this exact domain; a mismatch causes "No email domain record found".
-const SENDER_DOMAIN = "notify.luz-astrology.com"
+const SENDER_DOMAIN = "notify.sospreadshine.com"
 // FROM_DOMAIN is the domain shown in the From: header (e.g., "example.com").
 // When display_from_root is enabled, this can be the root domain for cleaner branding,
 // even though actual sending uses the subdomain above.
-const FROM_DOMAIN = "luz-astrology.com"
+const FROM_DOMAIN = "sospreadshine.com"
 
 // Map each template to a preference category. Templates not listed here are
 // treated as essential and always send (e.g., booking confirmations the user

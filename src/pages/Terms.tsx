@@ -273,7 +273,7 @@ const Terms = () => {
               anything.
             </p>
             <p className="font-body text-xs" style={{ color: "var(--color-gold)" }}>
-              support@luz-astrology.com
+              lensley.stfelix@gmail.com
             </p>
           </div>
         </div>

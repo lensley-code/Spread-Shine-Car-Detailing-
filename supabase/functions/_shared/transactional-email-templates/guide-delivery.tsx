@@ -4,7 +4,7 @@ import {
 } from 'npm:@react-email/components@0.0.22'
 import type { TemplateEntry } from './registry.ts'
 
-const SITE_NAME = 'Luz Astrology'
+const SITE_NAME = 'SoSpreadShine'
 const BOOK_COVER_URL =
   'https://jpjqndyqidyhitwjutaq.supabase.co/storage/v1/object/public/email-assets/spiritual-astrology-book-cover.jpg'
 
@@ -17,7 +17,7 @@ interface GuideDeliveryProps {
 const GuideDeliveryEmail = ({
   name,
   guideUrl = 'https://canva.link/ivpe0g9jp7km58w',
-  bookUrl = 'https://luz-astrology.com/#services',
+  bookUrl = 'https://sospreadshine.lovable.app/#services',
 }: GuideDeliveryProps) => {
   const firstName = name ? name.split(' ')[0] : null
   return (
@@ -41,7 +41,7 @@ const GuideDeliveryEmail = ({
           }
         `}</style>
       </Head>
-      <Preview>Your free Spiritual Guide from {SITE_NAME}</Preview>
+      <Preview>A message from {SITE_NAME}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={{ textAlign: 'center' }}>
@@ -97,7 +97,7 @@ const GuideDeliveryEmail = ({
 
 export const template = {
   component: GuideDeliveryEmail,
-  subject: 'Your Spiritual Guide from Luz Astrology ✨',
+  subject: 'A message from SoSpreadShine',
   displayName: 'Guide delivery',
   previewData: { name: 'Jane' },
 } satisfies TemplateEntry
