@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Check, Car, Home as HomeIcon, Sparkles, MapPin, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import autoImgAsset from "@/assets/services/auto-detailing.jpg.asset.json";
