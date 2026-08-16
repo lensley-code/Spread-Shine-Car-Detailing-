@@ -207,13 +207,24 @@ const QuoteSection = () => {
                 </a>
               </div>
 
-              <a
-                href={PHONE_HREF}
-                aria-label="Call SoSpreadShine at 954-204-6940"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full h-14 px-8 text-base font-semibold bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 mb-8"
-              >
-                <Phone size={18} /> Call Now
-              </a>
+              <div className="flex flex-col gap-3 mb-8">
+                <a
+                  href={PHONE_HREF}
+                  aria-label="Call SoSpreadShine at 954-204-6940"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full h-14 px-8 text-base font-semibold bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <Phone size={18} /> Call Now
+                </a>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with SoSpreadShine on WhatsApp"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full h-14 px-8 text-base font-semibold bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <WhatsAppIcon size={18} /> Chat on WhatsApp
+                </a>
+              </div>
 
               <div className="pt-6 border-t border-border space-y-4 text-left max-w-xs mx-auto">
                 <div className="flex items-start gap-3">
