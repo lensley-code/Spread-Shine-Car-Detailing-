@@ -159,8 +159,11 @@ export default function Offerings() {
           </p>
         </div>
 
-        {/* Two service cards side-by-side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        {/* Mobile: horizontal swipeable cards */}
+        <MobileServiceCarousel />
+
+        {/* Desktop/tablet: side-by-side */}
+        <div className="hidden sm:grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           <ServiceCard
             image={autoImg}
             imageAlt="Freshly detailed vehicle exterior"
@@ -177,6 +180,7 @@ export default function Offerings() {
             items={homeItems}
           />
         </div>
+
 
         {/* Highlights row */}
         <div className="mt-16 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
