@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { setPageSeo } from "@/lib/seo";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 const serviceOptions = [
   "Auto Detailing",
@@ -23,6 +24,7 @@ const serviceOptions = [
 
 const PHONE = "(954) 204-6940";
 const PHONE_HREF = "tel:9542046940";
+const WHATSAPP_HREF = "https://wa.me/19542046940";
 
 const quoteSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -313,6 +315,7 @@ const Contact = () => {
                 >
                   {PHONE}
                 </a>
+              <div className="flex flex-col gap-3">
                 <a
                   href={PHONE_HREF}
                   aria-label="Call SoSpreadShine at 954-204-6940"
@@ -320,6 +323,16 @@ const Contact = () => {
                 >
                   <Phone size={15} /> Call Now
                 </a>
+                <a
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with SoSpreadShine on WhatsApp"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold uppercase tracking-[0.1em] bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <WhatsAppIcon size={16} /> Chat on WhatsApp
+                </a>
+              </div>
                 <p className="text-xs text-muted-foreground mt-4 italic">
                   Usually responds within one business day.
                 </p>

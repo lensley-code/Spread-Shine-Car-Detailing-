@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Phone, ArrowRight } from "lucide-react";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 const PHONE_HREF = "tel:9542046940";
 
@@ -43,6 +44,15 @@ const StickyMobileCTA = () => {
           className="flex-1 inline-flex items-center justify-center gap-2 h-12 rounded-xl border border-primary/50 text-primary font-semibold text-sm active:scale-[0.98] transition-transform"
         >
           <Phone size={16} /> Call
+        </a>
+        <a
+          href="https://wa.me/19542046940"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with SoSpreadShine on WhatsApp"
+          className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#25D366] text-white active:scale-[0.98] transition-transform shrink-0"
+        >
+          <WhatsAppIcon size={20} />
         </a>
         <button
           type="button"
