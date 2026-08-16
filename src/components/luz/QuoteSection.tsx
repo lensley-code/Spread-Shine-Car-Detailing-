@@ -153,7 +153,7 @@ const QuoteSection = () => {
                 </div>
                 <div>
                   <label htmlFor="q-message" className={labelBase}>Tell us about your project</label>
-                  <textarea id="q-message" name="message" rows={4} maxLength={2000}
+                  <textarea id="q-message" name="message" rows={4} required maxLength={2000}
                     value={form.message} onChange={handleChange}
                     className={`${inputBase} resize-none min-h-[120px]`}
                     placeholder="A few details help us prepare an accurate quote..." />
