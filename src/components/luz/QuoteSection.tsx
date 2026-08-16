@@ -176,7 +176,7 @@ const QuoteSection = () => {
                 </div>
                 <h3 className="font-heading text-2xl font-semibold mb-3">Thank you!</h3>
                 <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                  Your quote request has been received. SoSpreadShine will contact you soon.
+                  Thanks! Your quote request has been received. We'll review your project and get back to you as soon as possible.
                 </p>
               </motion.div>
             )}
