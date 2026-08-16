@@ -50,31 +50,26 @@ const About = () => {
   }, []);
 
   return (
-    <div className="surface-cream min-h-screen">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
-      {/* Hero — Two Column */}
-      <section className="pt-28 pb-16 lg:pt-36 lg:pb-24 px-6 md:px-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-center">
+      {/* Unified editorial About section */}
+      <section className="pt-28 lg:pt-36 px-6 sm:px-8 md:px-12">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-start">
             {/* Portrait */}
             <motion.div
-              className="lg:col-span-2 flex justify-center lg:justify-start"
+              className="lg:col-span-5 xl:col-span-5"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
               variants={fadeUp}
             >
-              <div className="relative w-full max-w-[420px]">
-                {/* Soft gold glow */}
+              <div className="relative w-full max-w-[420px] mx-auto lg:mx-0 lg:sticky lg:top-28">
                 <div
-                  aria-hidden="true"
-                  className="absolute -inset-5 rounded-[2rem] bg-primary/15 blur-3xl opacity-70"
-                />
-                <div
-                  className="relative overflow-hidden rounded-[2rem] transition-transform duration-500 hover:scale-[1.02] border border-primary/20"
-                  style={{ boxShadow: "0 30px 60px -20px rgba(0,0,0,0.25)" }}
+                  className="overflow-hidden rounded-3xl border border-black/5"
+                  style={{ boxShadow: "0 30px 60px -24px rgba(0,0,0,0.28)" }}
                 >
                   <img
                     src={johnnyPortrait}
@@ -86,13 +81,13 @@ const About = () => {
               </div>
             </motion.div>
 
-            {/* Intro copy */}
+            {/* Copy */}
             <motion.div
-              className="lg:col-span-3"
+              className="lg:col-span-7 xl:col-span-7"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={0.15}
+              custom={0.12}
               variants={fadeUp}
             >
               <p className="text-primary text-xs sm:text-sm tracking-[0.3em] uppercase font-semibold mb-4">
@@ -101,56 +96,44 @@ const About = () => {
               <h1 className="font-heading font-semibold leading-[1.1] mb-6 text-foreground text-4xl sm:text-5xl lg:text-[3.25rem]">
                 Meet Johnny Jean-Baptist
               </h1>
-              <p className="max-w-[560px] text-base sm:text-lg text-muted-foreground leading-[1.75]">
+              <p className="max-w-[62ch] text-lg sm:text-xl text-foreground/80 leading-[1.7]">
                 For more than 20 years, Johnny Jean-Baptist has been helping people
                 care for one of their biggest investments — their vehicles and homes.
               </p>
+
+              <div className="mt-8 lg:mt-9 space-y-5 max-w-[68ch] text-base lg:text-[1.0625rem] text-muted-foreground leading-[1.7]">
+                <p>
+                  With years of hands-on experience in automotive detailing, vehicle
+                  maintenance, mechanical repairs, and exterior property care, Johnny
+                  believes that quality workmanship, honesty, and attention to detail
+                  never go out of style.
+                </p>
+                <p>
+                  What began as a passion for restoring vehicles has grown into
+                  SoSpreadShine, a business dedicated to helping customers maintain
+                  clean, beautiful, and well-cared-for vehicles and properties
+                  throughout South Florida.
+                </p>
+                <p>
+                  Whether he's detailing a family vehicle, pressure washing a driveway,
+                  cleaning a roof, or performing light automotive maintenance, Johnny
+                  approaches every project with the same commitment to professionalism
+                  and customer satisfaction.
+                </p>
+                <p>
+                  At SoSpreadShine, every customer is treated with respect, every
+                  project receives careful attention, and every job is completed with
+                  pride.
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Biography */}
-      <section className="py-16 lg:py-24 px-6 md:px-12">
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            variants={fadeUp}
-            className="space-y-6 text-base sm:text-lg text-muted-foreground leading-[1.85]"
-          >
-            <p>
-              With years of hands-on experience in automotive detailing, vehicle
-              maintenance, mechanical repairs, and exterior property care, Johnny
-              believes that quality workmanship, honesty, and attention to detail
-              never go out of style.
-            </p>
-            <p>
-              What began as a passion for restoring vehicles has grown into
-              SoSpreadShine, a business dedicated to helping customers maintain
-              clean, beautiful, and well-cared-for vehicles and properties
-              throughout South Florida.
-            </p>
-            <p>
-              Whether he's detailing a family vehicle, pressure washing a driveway,
-              cleaning a roof, or performing light automotive maintenance, Johnny
-              approaches every project with the same commitment to professionalism
-              and customer satisfaction.
-            </p>
-            <p>
-              At SoSpreadShine, every customer is treated with respect, every
-              project receives careful attention, and every job is completed with
-              pride.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Feature Highlights */}
-      <section className="surface-beige py-16 lg:py-24 px-6 md:px-12">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-white pt-[72px] pb-16 lg:pt-[120px] lg:pb-24 px-6 sm:px-8 md:px-12">
+        <div className="max-w-[1280px] mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -167,7 +150,7 @@ const About = () => {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
             {highlights.map(({ icon: Icon, title, text }, i) => (
               <motion.div
                 key={title}
@@ -176,7 +159,7 @@ const About = () => {
                 viewport={{ once: true }}
                 custom={0.08 * (i + 1)}
                 variants={fadeUp}
-                className="group relative rounded-2xl p-6 sm:p-7 bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10"
+                className="group relative h-full flex flex-col rounded-2xl p-6 sm:p-7 bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10"
               >
                 <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary/15 transition-colors">
                   <Icon size={20} strokeWidth={1.75} />
@@ -192,6 +175,7 @@ const About = () => {
           </div>
         </div>
       </section>
+
 
       {/* CTA */}
       <section className="surface-white py-16 lg:py-24 px-6 md:px-12">
