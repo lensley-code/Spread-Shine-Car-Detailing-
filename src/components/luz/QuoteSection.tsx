@@ -30,7 +30,7 @@ const quoteSchema = z.object({
   email: z.string().trim().email("Invalid email").max(255).optional().or(z.literal("")),
   service: z.string().min(1, "Select a service"),
   address: z.string().trim().max(200).optional(),
-  message: z.string().trim().max(2000).optional(),
+  message: z.string().trim().min(1, "Please tell us about your project").max(2000),
 });
 
 
@@ -60,10 +60,11 @@ const QuoteSection = () => {
         email: form.email.trim() ? form.email.trim().toLowerCase() : undefined,
         service_needed: form.service,
         property_address: form.address.trim() || undefined,
-        project_details: (form.message.trim() || "(No additional details provided)"),
+        project_details: form.message.trim(),
       };
       const { error } = await supabase.functions.invoke("submit-quote-request", { body: payload });
       if (error) throw error;
+      setForm({ name: "", phone: "", email: "", service: "", address: "", message: "" });
       setSubmitted(true);
     } catch (err) {
       console.error("[quote] submit failed", err);
@@ -152,7 +153,7 @@ const QuoteSection = () => {
                 </div>
                 <div>
                   <label htmlFor="q-message" className={labelBase}>Tell us about your project</label>
-                  <textarea id="q-message" name="message" rows={4} maxLength={2000}
+                  <textarea id="q-message" name="message" rows={4} required maxLength={2000}
                     value={form.message} onChange={handleChange}
                     className={`${inputBase} resize-none min-h-[120px]`}
                     placeholder="A few details help us prepare an accurate quote..." />
@@ -175,7 +176,7 @@ const QuoteSection = () => {
                 </div>
                 <h3 className="font-heading text-2xl font-semibold mb-3">Thank you!</h3>
                 <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                  Your quote request has been received. SoSpreadShine will contact you soon.
+                  Thanks! Your quote request has been received. We'll review your project and get back to you as soon as possible.
                 </p>
               </motion.div>
             )}
