@@ -45,6 +45,14 @@ const FinalCTABand = () => {
                 <Phone size={15} /> Call (954) 204-6940
               </a>
             </Button>
+            <Button
+              asChild
+              className="w-full sm:w-auto rounded-full h-12 px-7 text-sm font-semibold tracking-wide bg-[#25D366] text-white hover:bg-[#1DA851] border-none"
+            >
+              <a href="https://wa.me/19542046940" target="_blank" rel="noopener noreferrer" aria-label="Chat with SoSpreadShine on WhatsApp" className="inline-flex items-center gap-2">
+                <WhatsAppIcon size={16} /> WhatsApp
+              </a>
+            </Button>
           </div>
         </div>
       </div>
