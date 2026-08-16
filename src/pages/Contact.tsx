@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { setPageSeo } from "@/lib/seo";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 const serviceOptions = [
   "Auto Detailing",
