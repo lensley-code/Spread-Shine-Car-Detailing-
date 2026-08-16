@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Phone, ArrowRight } from "lucide-react";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 const PHONE_HREF = "tel:9542046940";
 
