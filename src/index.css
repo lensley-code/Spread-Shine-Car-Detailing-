@@ -139,3 +139,12 @@ html, body {
   }
 }
 
+
+/* Hide scrollbars for horizontal snap carousels while keeping native scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
