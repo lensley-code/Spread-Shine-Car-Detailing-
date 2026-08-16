@@ -60,10 +60,11 @@ const QuoteSection = () => {
         email: form.email.trim() ? form.email.trim().toLowerCase() : undefined,
         service_needed: form.service,
         property_address: form.address.trim() || undefined,
-        project_details: (form.message.trim() || "(No additional details provided)"),
+        project_details: form.message.trim(),
       };
       const { error } = await supabase.functions.invoke("submit-quote-request", { body: payload });
       if (error) throw error;
+      setForm({ name: "", phone: "", email: "", service: "", address: "", message: "" });
       setSubmitted(true);
     } catch (err) {
       console.error("[quote] submit failed", err);
