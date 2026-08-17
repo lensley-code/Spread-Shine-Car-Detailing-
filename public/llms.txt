@@ -1,0 +1,14 @@
+# SoSpreadShine
+
+> Professional auto detailing and exterior home cleaning serving South Florida.
+
+SoSpreadShine is a locally owned service business offering premium auto detailing
+(exterior, interior, packages, engine bay, headlight restoration) and exterior home
+care (house washing, roof, driveway, sidewalk, patio and surface cleaning).
+
+## Pages
+
+- [Home](/): Services overview, why customers choose SoSpreadShine, and free quote request.
+- [Our Work](/our-work): Before and after photos of auto detailing and home exterior projects.
+- [About](/about): Meet owner Johnny Jean-Baptist and the values behind the business.
+- [Contact](/contact): Request a free quote, call, or message on WhatsApp at (954) 204-6940.

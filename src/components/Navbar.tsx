@@ -166,6 +166,8 @@ const Navbar = () => {
         <button
           className="lg:hidden text-[hsl(40_20%_90%)]"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
