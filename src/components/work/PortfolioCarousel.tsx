@@ -104,6 +104,34 @@ export default function PortfolioCarousel({ projects }: Props) {
   });
   const [selected, setSelected] = useState(0);
   const [snaps, setSnaps] = useState<number[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const lightboxItems = useMemo<LightboxItem[]>(
+    () =>
+      projects.flatMap((p) =>
+        p.beforeImage
+          ? [
+              { src: p.beforeImage, title: p.title, label: p.label, caption: "Before" },
+              { src: p.image, title: p.title, label: p.label, caption: "After" },
+            ]
+          : [{ src: p.image, title: p.title, label: p.label }]
+      ),
+    [projects]
+  );
+
+  const indexFor = useCallback(
+    (projectId: string, which: "before" | "after") => {
+      let i = 0;
+      for (const p of projects) {
+        if (p.id === projectId) return p.beforeImage && which === "after" ? i + 1 : i;
+        i += p.beforeImage ? 2 : 1;
+      }
+      return 0;
+    },
+    [projects]
+  );
+
+
 
   const onSelect = useCallback(() => {
     if (!embla) return;
