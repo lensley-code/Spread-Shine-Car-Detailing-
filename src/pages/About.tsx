@@ -19,7 +19,7 @@ const fadeUp = {
 const highlights = [
   {
     icon: Award,
-    title: "20+ Years of Experience",
+    title: "10+ Years of Experience",
     text: "Decades of hands-on automotive and exterior cleaning experience.",
   },
   {
