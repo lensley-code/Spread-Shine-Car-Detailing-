@@ -171,7 +171,7 @@ const About = () => {
 
 
       {/* CTA */}
-      <section className="surface-white py-16 lg:py-24 px-6 md:px-12">
+      <section className="bg-white py-16 lg:py-24 px-6 md:px-12">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial="hidden"
