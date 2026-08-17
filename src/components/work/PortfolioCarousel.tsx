@@ -213,6 +213,14 @@ export default function PortfolioCarousel({ projects }: Props) {
           />
         ))}
       </div>
+
+      <Lightbox
+        items={lightboxItems}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onIndexChange={setLightboxIndex}
+      />
     </div>
+
   );
 }
