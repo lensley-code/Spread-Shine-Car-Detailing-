@@ -192,7 +192,7 @@ export default function PortfolioCarousel({ projects }: Props) {
               key={p.id}
               className="pl-4 md:pl-6 shrink-0 grow-0 basis-[86%] sm:basis-[60%] lg:basis-[38%] xl:basis-[34%]"
             >
-              <ProjectCard p={p} />
+              <ProjectCard p={p} onOpen={(which) => setLightboxIndex(indexFor(p.id, which))} />
             </div>
           ))}
         </div>
