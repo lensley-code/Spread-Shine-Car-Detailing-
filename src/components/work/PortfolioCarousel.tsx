@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Lightbox, { type LightboxItem } from "./Lightbox";
 
 export type Project = {
   id: string;
@@ -14,12 +15,29 @@ export type Project = {
 
 type Props = { projects: Project[] };
 
-const ProjectCard = ({ p }: { p: Project }) => (
+const ExpandCue = () => (
+  <span className="pointer-events-none absolute top-3 right-3 h-7 w-7 rounded-full bg-background/80 text-foreground backdrop-blur flex items-center justify-center opacity-90">
+    <Expand size={13} />
+  </span>
+);
+
+const ProjectCard = ({
+  p,
+  onOpen,
+}: {
+  p: Project;
+  onOpen: (which: "before" | "after") => void;
+}) => (
   <figure className="group">
     <div className="relative overflow-hidden rounded-[22px] aspect-[3/2] bg-muted">
       {p.beforeImage ? (
         <div className="grid grid-cols-2 h-full w-full">
-          <div className="relative overflow-hidden">
+          <button
+            type="button"
+            aria-label={`View ${p.title} before image larger`}
+            onClick={() => onOpen("before")}
+            className="relative overflow-hidden cursor-pointer"
+          >
             <img
               src={p.beforeImage}
               alt={`${p.title} before`}
@@ -29,8 +47,13 @@ const ProjectCard = ({ p }: { p: Project }) => (
             <span className="absolute bottom-3 left-3 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-[0.15em] bg-background/85 text-foreground backdrop-blur">
               Before
             </span>
-          </div>
-          <div className="relative overflow-hidden">
+          </button>
+          <button
+            type="button"
+            aria-label={`View ${p.title} after image larger`}
+            onClick={() => onOpen("after")}
+            className="relative overflow-hidden cursor-pointer"
+          >
             <img
               src={p.image}
               alt={`${p.title} after`}
@@ -40,16 +63,25 @@ const ProjectCard = ({ p }: { p: Project }) => (
             <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-[0.15em] bg-background/85 text-foreground backdrop-blur">
               After
             </span>
-          </div>
+          </button>
           <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-primary/70" />
+          <ExpandCue />
         </div>
       ) : (
-        <img
-          src={p.image}
-          alt={p.title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-        />
+        <button
+          type="button"
+          aria-label={`View ${p.title} larger`}
+          onClick={() => onOpen("after")}
+          className="block h-full w-full cursor-pointer"
+        >
+          <img
+            src={p.image}
+            alt={p.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+          <ExpandCue />
+        </button>
       )}
     </div>
     <figcaption className="pt-4">
@@ -62,6 +94,7 @@ const ProjectCard = ({ p }: { p: Project }) => (
     </figcaption>
   </figure>
 );
+
 
 export default function PortfolioCarousel({ projects }: Props) {
   const [emblaRef, embla] = useEmblaCarousel({
